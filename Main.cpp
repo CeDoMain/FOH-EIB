@@ -55,22 +55,12 @@ Main::Main()
   });
   // Rückmeldungen konfigurieren
   // [Name].AddRecvObj[empfangsObjekt], F("[Name max. 20 Zeichen]"));
-  Audio.AddRecvObj(11, F("Mischpult"));
-  Audio.AddRecvObj(12, F("Siderack"));
-  Audio.AddRecvObj(13, F("Verst\xE1rker A"));
-  Audio.AddRecvObj(14, F("Verst\xE1rker B"));
-  Audio.AddRecvObj(15, F("Verst\xE1rker C"));
+  Audio.AddRecvObj(11, F("Audio 1"));
+  Audio.AddRecvObj(12, F("Audio 2"));
 
   Video.AddRecvObj(21, F("Videohub"));
-  Video.AddRecvObj(22, F("Videomischer"));
-  Video.AddRecvObj(23, F("Bildschirme"));
-  Video.AddRecvObj(24, F("Kameras"));
 
-  Licht.AddRecvObj(51, F("Lichtmischpult"));
-  Licht.AddRecvObj(52, F("Dimmer A"));
-  Licht.AddRecvObj(53, F("Dimmer B"));
-  Licht.AddRecvObj(54, F("Dimmer C"));
-  Licht.AddRecvObj(55, F("Dimmer D"));
+  Licht.AddRecvObj(51, F("Sicherung Licht"));
 
   NutzungF1.AddRecvObj(61, 0);
   NutzungF2.AddRecvObj(63, 0);

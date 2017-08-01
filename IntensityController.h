@@ -12,7 +12,6 @@ private:
   NkkKey* IntensityKey;      // Taster, der Helligkeit und Kontrast steuert
   Timer DimmerTimeout;          // Timer, der Taster und Anzeige dimmt
   Fader Fade;                   // Fader, der Taster und Anzeige dimmt
-  float Contrast;               // Kontrast des Displays
   float ActiveIntensity;        // Helligkeit nach Tastendruck
   const float DimmedIntensity;  // Helligkeit im Standby
   const float DimmTime;         // Zeit in s, in der gedimmt wird

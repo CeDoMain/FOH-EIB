@@ -33,19 +33,20 @@ void DisplayController::Update()
   MessageTimeout.Update();
   ErrorTimeout.Update();
 }
-void DisplayController::ShowMessage(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2)
+void DisplayController::ShowMessage(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2, unsigned int intervall)
 {
   // Mitteilung für eine kurze Zeit anzeigen
-  MessageTimeout.Start();
+  MessageTimeout.Stop();
   Lcd.clear();
   Lcd.setCursor(0, 0);
   PrintTwoLine(msg1, msg2);
+  MessageTimeout.SetTime(intervall);
   MessageTimeout.Start();
 }
-void DisplayController::ShowMessage(char* msg1, char* msg2)
+void DisplayController::ShowMessage(char* msg1, char* msg2, unsigned int intervall)
 {
   // Mitteilung für eine kurze Zeit anzeigen
-  MessageTimeout.Start();
+  MessageTimeout.Stop();
   Lcd.clear();
   Lcd.setCursor(0, 0);
   if (msg1 != 0)
@@ -57,24 +58,13 @@ void DisplayController::ShowMessage(char* msg1, char* msg2)
     Lcd.setCursor(0, 1);
     Lcd.print(msg2);
   }
-  MessageTimeout.Start();
-}
-void DisplayController::ShowContrast(byte value, byte max)
-{
-  // Kontrast für eine kurze Zeit anzeigen
-  MessageTimeout.Start();
-  Lcd.clear();
-  Lcd.setCursor(0, 0);
-  Lcd.print(TEXT_CONTRAST);
-  Lcd.print(value);
-  Lcd.print(F(" / "));
-  Lcd.print(max);
+  MessageTimeout.SetTime(intervall);
   MessageTimeout.Start();
 }
 void DisplayController::ShowIntensity(byte value, byte max)
 {
   // Helligkeit für eine kurze Zeit anzeigen
-  MessageTimeout.Start();
+  MessageTimeout.Stop();
   Lcd.clear();
   Lcd.setCursor(0, 0);
   Lcd.print(TEXT_INTENSITY);

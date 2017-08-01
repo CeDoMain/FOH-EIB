@@ -13,8 +13,8 @@ WeatherController::WeatherController(NkkKey* weatherKey)
     RecvTemperatureMin(KNX_WEATHER_TEMPMIN),
     RecvTemperatureMax(KNX_WEATHER_TEMPMAX),
     RecvWind(KNX_WEATHER_WIND),
-    DisplayDateTime(TIME_WEATHER_DATETIMEDELAY),
-    DisplayWeather(TIME_WEATHER_DATETIMEDELAY + TIME_WEATHER_WEATHERDELAY)
+    DisplayDateTime(TIME_WEATHER_REQUESTDELAY),
+    DisplayWeather(TIME_WEATHER_REQUESTDELAY + TIME_WEATHER_DISPLAYDELAY)
 {
 
 }
@@ -84,7 +84,7 @@ void WeatherController::ShowDateTime()
   char Line1[20], Line2[20];
   sprintf(Line1, "     %02i.%02i.%i", Day, Month, Year);
   sprintf(Line2, "       %02i:%02i", Hour, Minute);
-  Global::Disp.ShowMessage(Line1, Line2);
+  Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
 }
 void WeatherController::ShowWeather()
 {
@@ -95,5 +95,5 @@ void WeatherController::ShowWeather()
   sprintf(Line2, "LO %2i,%01i\xDF""C HI %2i,%01i\xDF""C",
     (int)TemperatureMin, (int)((TemperatureMin - (int)TemperatureMin) * 10),
     (int)TemperatureMax, (int)((TemperatureMax - (int)TemperatureMax) * 10));
-  Global::Disp.ShowMessage(Line1, Line2);
+  Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
 }

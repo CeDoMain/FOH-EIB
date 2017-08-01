@@ -46,9 +46,8 @@ public:
   void Update();
 
   // Zeigt eine Meldung an
-  void ShowMessage(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2 = 0);
-  void ShowMessage(char* msg1, char* msg2 = 0);
-  void ShowContrast(byte value, byte max);
+  void ShowMessage(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2 = 0, unsigned int intervall = TIME_DISP_MSGTIMEOUT);
+  void ShowMessage(char* msg1, char* msg2 = 0, unsigned int intervall = TIME_DISP_MSGTIMEOUT);
   void ShowIntensity(byte value, byte max);
 
   // Registriert einen Fehler und gibt seine ID zurück
@@ -57,11 +56,11 @@ public:
   // Löst eine Fehlermeldung aus
   void ErrorOccured(byte id);
 
-  // Ändert den Kontrast des Displays [0;1]
-  void SetContrast(float contrast);
-
   // Ändert die Helligkeit der Hintergrundbeleuchtung [0;1]
   void SetIntensity(float intensity);
+
+  // Ändert den Kontrast des Display [0;1]
+  void SetContrast(float contrast);
 
 private:
   // Zeigt den Fehler mit der angegebenen ID an

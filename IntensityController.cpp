@@ -2,7 +2,7 @@
 
 IntensityController::IntensityController(NkkKey* intensityKey)
   : IntensityKey(intensityKey), DimmerTimeout(TIME_DIMM_TIMEOUT), Fade(),
-    Contrast(LGHT_DIMM_CONTRAST), ActiveIntensity(LGHT_DIMM_ACTIVEINTENSITY), DimmedIntensity(LGHT_DIMM_DIMMEDINTENSITY),
+    ActiveIntensity(LGHT_DIMM_ACTIVEINTENSITY), DimmedIntensity(LGHT_DIMM_DIMMEDINTENSITY),
     DimmTime(TIME_DIMM_DIMMTIME), WakeUpTime(TIME_DIMM_WAKEUPTIME)
 {
 
@@ -48,22 +48,10 @@ void IntensityController::WakeUp()
 
 void IntensityController::SwitchIntensity()
 {
-  if (Global::IsKeyLockInactive)
-  {
-    // Kontrast verstellen
-    Contrast += 0.1;
-    if(Contrast >= 1)
-      Contrast = 0;
-    Global::Disp.SetContrast(Contrast);
-    Global::Disp.ShowContrast(Contrast / 0.1, 9);
-  }
-  else
-  {
-    // Helligkeit verstellen
-    ActiveIntensity += 0.4;
-    if(ActiveIntensity > 1)
-      ActiveIntensity = 0.2;
-    Fade.Start(WakeUpTime, ActiveIntensity);
-    Global::Disp.ShowIntensity((ActiveIntensity - 0.2) / 0.4 + 1, 3);
-  }
+  // Helligkeit verstellen
+  ActiveIntensity += 0.4;
+  if(ActiveIntensity > 1)
+    ActiveIntensity = 0.2;
+  Fade.Start(WakeUpTime, ActiveIntensity);
+  Global::Disp.ShowIntensity((ActiveIntensity - 0.2) / 0.4 + 1, 3);
 }

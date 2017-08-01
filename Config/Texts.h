@@ -16,7 +16,7 @@
 #define TEXT_ACTIVATED              F("aktiviert")
 #define TEXT_DEACTIVATED            F("deaktiviert")
 #define TEXT_ALREADY_SWITCHING_1    F("Schaltvorgang")
-#define TEXT_ALREADY_SWITCHING_2    F("l\u00F5uft bereits")
+#define TEXT_ALREADY_SWITCHING_2    F("l\xF5uft bereits")
 
 #define TEXT_AUDIO                  F("Audio")
 #define TEXT_VIDEO                  F("Video")

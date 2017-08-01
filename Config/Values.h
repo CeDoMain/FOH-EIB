@@ -15,8 +15,8 @@
 #define TIME_DIMM_DIMMTIME            2         // Zeit in Sekunden in der die Anzeigen gedimmt werden
 #define TIME_DIMM_WAKEUPTIME          0.2       // Zeit in Sekunden in der die Anzeigen aktiviert werden
 
-#define TIME_WEATHER_DATETIMEDELAY    1000      // Zeit in ms, zwischen Anfrage und Anzeige der Wetter und Zeitinformationen
-#define TIME_WEATHER_WEATHERDELAY     4000      // Zeit in ms, zwischen Anzeige der Zeit und Anzeige der Wetterfunktionen
+#define TIME_WEATHER_REQUESTDELAY     1000      // Zeit in ms, zwischen Anfrage und Anzeige der Wetter und Zeitinformationen
+#define TIME_WEATHER_DISPLAYDELAY     3000      // Zeit in ms, die Wetter und Zeit angezeigt werden
 
 #define TIME_WINDOW_DESELECT          5000      // Zeit in ms, nach der ein gewähltes Fenster oder eine Jalousie wieder abgewählt wird
 

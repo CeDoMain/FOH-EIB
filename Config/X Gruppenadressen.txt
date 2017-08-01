@@ -17,11 +17,11 @@ ________________________________________________________________________________
 Audio             senden        10            Audio Hauptfunktion
 Audio             empfangen     11            Rückmeldung Audio 1
 Audio             empfangen     12            Rückmeldung Audio 2
-Audio             empfangen     13            Rückmeldung Audio 3
-Audio             empfangen     14            Rückmeldung Audio 4
-Audio             empfangen     15            Rückmeldung Audio 5
-Audio             empfangen     16            Rückmeldung Audio 6
-Audio             empfangen     17            Rückmeldung Audio 7
+---------         ---------     13            ---------
+---------         ---------     14            ---------
+---------         ---------     15            ---------
+---------         ---------     16            ---------
+---------         ---------     17            ---------
 DMK               senden        18            DMK Hauptfunktion
 DMK               empfangen     19            Rückmeldung DMK
 ________________________________________________________________________________

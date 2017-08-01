@@ -82,9 +82,10 @@ void MainFunction::FunctionKnxObjectReceived(byte object, char* value)
   KnxObjectData* obj = GetRecvObject(object);
   if (obj != 0)
   {
+    Debug(F("ValueRecv: (%i) (%s)\n\r"), object, value);
     // Rückmeldung speichern und auf Korrektheit prüfen
     obj->Value = SIMKNX128::ParseBool(value);
-    obj->IsCorrectValue = SIMKNX128::ParseBool(value) == SendObj.Value;
+    obj->IsCorrectValue = obj->Value == SendObj.Value;
 
     // Meldung oder Fehler anzeigen
     if (obj->IsCorrectValue)
@@ -122,7 +123,7 @@ void MainFunction::Evaluate()
       else
         AllCorrect = false;
     });
-  if(AllCorrect)
+  if (AllCorrect)
   {
     if (SendObj.Name != 0)
       Global::Disp.ShowMessage(SendObj.Name, SendObj.Value ? TEXT_ON : TEXT_OFF);

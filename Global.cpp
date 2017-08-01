@@ -54,7 +54,7 @@ NkkKey Global::Key[5][5] =
    { Button(), BiColorLED() }
  }
 };
-bool Global::IsKeyLockInactive = true;
+bool Global::IsKeyLockInactive = false;
 bool Global::IsRaining = false;
 DisplayController Global::Disp = DisplayController(&KEY_ERROR, &Global::IsKeyLockInactive);
 SIMKNX128 Global::Knx = SIMKNX128();
@@ -121,7 +121,7 @@ void Global::KeyLockActivate()
 
 void Global::KeyLockDeactivate()
 {
-  //IsKeyLockInactive = false;
+  IsKeyLockInactive = false;
   Disp.ShowMessage(TEXT_KEY, TEXT_DEACTIVATED);
 }
 

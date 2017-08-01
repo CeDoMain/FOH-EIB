@@ -3,23 +3,24 @@
 Main::Main()
     // Hauptfunktionen (Audio, Video, ...) und Steuereinheiten (Fenster, Display, ...) konfigurieren
     // [Name](&Global::Key[y][x], [sendeObjekt], F("[Name max. 20 Zeichen]")),
-  : Audio(&Global::Key[1][4], 10, F("Audio")),
-    Video(&Global::Key[1][3], 20, F("Video")),
-    Licht(&Global::Key[1][2], 50, F("Licht")),
-    NutzungF1(&Global::Key[1][1], 60, F("Nutzung Forum 1")),
-    NutzungF2(&Global::Key[1][0], 62, F("Nutzung Forum 2")),
-    DMK(&Global::Key[2][4], 18, F("Dolmetscherkabinen")),
-    Livestream(&Global::Key[2][3], 40, F("Livestream")),
-    SeWo(&Global::Key[2][2], 42, F("Seniorenwohnanlage")),
-    Pflegeheim(&Global::Key[2][1], 44, F("Pflegeheim")),
-    Beamer(&Global::Key[2][0]),
-    // Weitere Funktionen konfigurieren
-    // Fenstersteuerung(Taster für "offen/oben", Taster für "schließen/unten")
-    WinControl(&Global::Key[3][4], &Global::Key[4][4]),
-    // Helligkeit der Tasten und Displaybeleuchtung einstellen (bei Schlüsselaktivierung: Kontrast)
-    IntControl(&Global::Key[0][3]),
+  : Audio(&KEY_AUDIO, 10, F("Audio"), TIME_AUDIOTIMEOUT),
+    Video(&KEY_VIDEO, 20, F("Video")),
+    Licht(&KEY_LIGHT, 50, F("Licht")),
+    NutzungF1(&KEY_USEF1, 60, F("Nutzung Forum 1")),
+    NutzungF2(&KEY_USEF2, 62, F("Nutzung Forum 2")),
+    DMK(&KEY_DMK, 18, F("Dolmetscherkabinen")),
+    Livestream(&KEY_LIVESTREAM, 40, F("Livestream")),
+    SeWo(&KEY_SEWO, 42, F("Seniorenwohnanlage")),
+    Pflegeheim(&KEY_PFLEGEHEIM, 44, F("Pflegeheim")),
+    
+    // Hauptfunktion Beamer
+    Beamer(&KEY_BEAMER),
+    // Fenster- und Jalousiesteuerung
+    WinControl(&KEY_WINDOWUP, &KEY_WINDOWDOWN),
+    // Helligkeit der Tasten und Displaybeleuchtung einstellen
+    IntControl(&KEY_INTENSITY),
     // Langer Druck auf den Taster: Licht im Foyer einschalten, Kurzer Druck: Wetter und Uhrzeit abfrage
-    WeatherControl(&Global::Key[0][2])
+    WeatherControl(&KEY_WEATHER)
 {
   // Schaltbedingungen (NutzungF1, Regen, Audio eingeschaltet, ...) konfigurieren
   // Hier kann man Programmcode reinschreiben, der ausgeführt wird,
@@ -74,20 +75,20 @@ Main::Main()
   //   [Rückmeldung-Offen-Objekt], [Rückmeldung-Geschlossen-Objekt]
   //   F("[Name max. 20 Zeichen]"), &Global::Key[y][x],
   //   [Aktivierungsbedingung => 0 oder z.B. &MasterNutzungF1]});
-  WinControl.AddWindow(90, 91, 92, 93, F("F1 Fenster Dach"), &Global::Key[3][1], 0);
-  WinControl.AddWindow(95, 96, 97, 98, F("F1 Fenster Seite"), &Global::Key[4][1], 0);
-  WinControl.AddWindow(105, 106, 107, 108, F("F2 Fenster"), &Global::Key[3][0], 0);
+  WinControl.AddWindow(90, 91, 92, 93, F("F1 Fenster Dach"), &KEY_WINDOWF1ROOF, 0);
+  WinControl.AddWindow(95, 96, 97, 98, F("F1 Fenster Seite"), &KEY_WINDOWF1SIDE, 0);
+  WinControl.AddWindow(105, 106, 107, 108, F("F2 Fenster"), &KEY_WINDOWF2, 0);
 
   // Jalousiesteuerung konfigurieren
   // WinControl.AddJalousie([Fahren-Objekt], [Step-Objekt],
   //   [Rückmeldung-Oben-Objekt], [Rückmeldung-Unten-Objekt]
   //   F("[Name max. 20 Zeichen]"), &Global::Key[y][x],
   //   [Aktivierungsbedingung => 0 oder z.B. &MasterNutzungF1]});
-  WinControl.AddJalousie(70, 71, 72, 73, F("F1 Jalousie oben"), &Global::Key[3][3], 0);
-  WinControl.AddJalousie(75, 76, 77, 78, F("F1 Jalousie unten"), &Global::Key[4][3], 0);
-  WinControl.AddJalousie(80, 81, 82, 83, F("F1 Altar Jalousie"), &Global::Key[4][2], 0);
-  WinControl.AddJalousie(85, 86, 87, 88, F("F1 Altar Rollo"), &Global::Key[3][2], 0);
-  WinControl.AddJalousie(100, 101, 102, 103, F("F2 Jalousie"), &Global::Key[4][0], 0);
+  WinControl.AddJalousie(70, 71, 72, 73, F("F1 Jalousie oben"), &KEY_JALOUSIEF1TOP, 0);
+  WinControl.AddJalousie(75, 76, 77, 78, F("F1 Jalousie unten"), &KEY_JALOUSIEF1BTN, 0);
+  WinControl.AddJalousie(80, 81, 82, 83, F("F1 Altar Jalousie"), &KEY_JALOUSIEF1ALT, 0);
+  WinControl.AddJalousie(85, 86, 87, 88, F("F1 Altar Rollo"), &KEY_JALOUSIEF1ROL, 0);
+  WinControl.AddJalousie(100, 101, 102, 103, F("F2 Jalousie"), &KEY_JALOUSIEF2, 0);
 
   // Schalt-Abhängigkeiten zwischen Hauptfunktionen
   // [Name der Slavefunktion].CanActivate = &[Aktivierungsbedingung => Zeile entfernen oder z.B. MasterNutzungF1];

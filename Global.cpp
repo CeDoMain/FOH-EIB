@@ -56,7 +56,7 @@ NkkKey Global::Key[5][5] =
 };
 bool Global::IsKeyLockInactive = true;
 bool Global::IsRaining = false;
-DisplayController Global::Disp = DisplayController(&KEY_DISPLAY, &Global::IsKeyLockInactive);
+DisplayController Global::Disp = DisplayController(&KEY_ERROR, &Global::IsKeyLockInactive);
 SIMKNX128 Global::Knx = SIMKNX128();
 Button Global::KeyLockBtn = Button();
 

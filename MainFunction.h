@@ -33,7 +33,8 @@ private:
 
   // Konstruktor
 public:
-  MainFunction(NkkKey* functionKey, const byte functionKnxObjectIndex, const __FlashStringHelper* name);
+  MainFunction(NkkKey* functionKey, const byte functionKnxObjectIndex,
+    const __FlashStringHelper* name, unsigned int timeout = TIME_MAINFUNCTION_TIMEOUT);
 
   // Methoden
 public:

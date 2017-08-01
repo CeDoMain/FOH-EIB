@@ -1,8 +1,8 @@
 #include "MainFunction.h"
 
-  MainFunction::MainFunction(NkkKey* functionKey, const byte functionKnxObjectIndex, const __FlashStringHelper* name)
+  MainFunction::MainFunction(NkkKey* functionKey, const byte functionKnxObjectIndex, const __FlashStringHelper* name, unsigned int timeout)
   : CanActivate(0), FunctionKey(functionKey), IsSwitching(false),
-    SwitchTimeout(TIME_MAINFUNCTION_TIMEOUT),
+    SwitchTimeout(timeout),
     SendObj({ functionKnxObjectIndex, false, true, name, Global::Disp.RegisterError(name)}),
     RecvObj(new LinkedList<KnxObjectData*>()),
     PulsePerSecond(TIME_PULSERATE)

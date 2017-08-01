@@ -1,0 +1,68 @@
+Schlüsselschalter an PWM7
+Schraubklemm Nr.7 an PWM6 (!)
+Schraubklemm Nr.6 an PWM5 (!)
+Schraubklemm Nr.5 an PWM4 (!)
+
+NKK-PCB    >    I2C Adresse
+_______________________________________________________________
+Control    >    B000
+MainFunc 1 >    B001
+MainFunc 2 >    B010
+Window 1   >    B110 (!) A0 vom PWM Chip defekt
+Window 2   >    B100
+
+Display    >    Arduino
+_______________________________________________________________
+1   VSS    >    GND
+2   VDD    >    +5V
+3   VEE    >    über RC-Glied an PWM3
+4   RS     >    D52
+5   RW     >    D50
+6   E      >    D48
+7   D0     >    D46
+8   D1     >    D44
+9   D2     >    D42
+10  D3     >    D40
+11  D4     >    D38
+12  D5     >    D36
+13  D6     >    D34
+14  D7     >    D32
+15  LED+   >    ohne Widerstand an PWM2
+16  LED-   >    GND
+
+
+Bussystem  >    Arduino
+_______________________________________________________________
+1          >    GND
+2          >    +5V
+3          >    SDA
+4          >    SCL
+5          >    -
+6          >    -
+7          >    -
+8          >    -
+9          >    -
+10         >    -
+
+
+MCP23017   >    NKK-Taster (Pinheader oben links)
+_______________________________________________________________
+GPA1       >    links
+GPA2       >    links  mitte
+GPA7       >    mitte
+GPA6       >    rechts mitte
+GPA4       >    rechts
+
+
+PCA9685    >    NKK-Taster (Pinheader oben links)
+_______________________________________________________________
+LED13      >    Rot  links
+LED12      >    Grün links
+LED11      >    Rot  links  mitte
+LED10      >    Grün links  mitte
+LED7       >    Rot  mitte
+LED6       >    Grün mitte
+LED5       >    Rot  rechts mitte
+LED4       >    Grün rechts mitte
+LED1       >    Rot  rechts
+LED0       >    Grün rechts

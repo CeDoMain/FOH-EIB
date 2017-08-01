@@ -1,0 +1,131 @@
+Funktionsgruppe   Typ           Objekt        Name / Beschreibung
+________________________________________________________________________________
+
+Datum & Uhrzeit   senden        0             Anforderung Datum/Uhrzeit
+Temperatur        senden        1             Anforderung min/max
+Datum & Uhrzeit   empfangen     2             Datum
+Datum & Uhrzeit   empfangen     3             Uhrzeit
+Temperatur        empfangen     4             aktuell
+Temperatur        empfangen     5             min
+Temperatur        empfangen     6             max
+Wind              empfangen     7             aktuell
+Windalarm         empfangen     8             Rückmeldung
+Regenalarm        empfangen     9             Rückmeldung
+
+________________________________________________________________________________
+
+Audio             senden        10            Audio Hauptfunktion
+Audio             empfangen     11            Rückmeldung Audio 1
+Audio             empfangen     12            Rückmeldung Audio 2
+Audio             empfangen     13            Rückmeldung Audio 3
+Audio             empfangen     14            Rückmeldung Audio 4
+Audio             empfangen     15            Rückmeldung Audio 5
+Audio             empfangen     16            Rückmeldung Audio 6
+Audio             empfangen     17            Rückmeldung Audio 7
+DMK               senden        18            DMK Hauptfunktion
+DMK               empfangen     19            Rückmeldung DMK
+________________________________________________________________________________
+
+Video             senden        20            Video Hauptfunktion
+Video             empfangen     21            Videohub
+---------         ---------     22            ---------
+---------         ---------     23            ---------
+---------         ---------     24            ---------
+---------         ---------     25            ---------
+---------         ---------     27            ---------
+---------         ---------     28            ---------
+---------         ---------     29            ---------
+
+>  Beamer         senden        30            Beamer Hauptfunktion
+>  Beamer         senden        31            Statusabfrage
+---------         ---------     32            ---------
+>  Beamer         empfangen     33            Betriebsbereitschaft
+>  Beamer         empfangen     34            Zurückzählen
+>  Beamer         empfangen     35            Aufwärmen
+>  Beamer         empfangen     36            Abkühlen
+---------         ---------     37            ---------
+---------         ---------     38            ---------
+---------         ---------     39            ---------
+
+>  Livestream     senden        40            Livestream Hauptfunktion
+>  Livestream     empfangen     41            Rückmeldung Livestream
+>  SeWo           senden        42            SeWo Hauptfunktion
+>  SeWo           empfangen     43            Rückmeldung SeWo
+>  Pflegeheim     senden        44            Pflegeheim Hauptfunktion
+>  Pflegeheim     empfangen     45            Rückmeldung Pflegeheim
+---------         ---------     46            ---------
+---------         ---------     47            ---------
+---------         ---------     48            ---------
+---------         ---------     49            ---------
+________________________________________________________________________________
+
+Licht             senden        50            Licht Hauptfunktion
+Licht             empfangen     51            Rückmeldung Licht
+---------         ---------     52            ---------
+---------         ---------     53            ---------
+---------         ---------     54            ---------
+---------         ---------     55            ---------
+---------         ---------     56            ---------
+---------         ---------     57            ---------
+---------         ---------     58            ---------
+---------         ---------     59            ---------
+________________________________________________________________________________
+
+Nutzung F1        senden        60            Nutzung F1 Hauptfunktion
+Nutzung F1        empfangen     61            Rückmeldung Nutzung F1
+Nutzung F2        senden        62            Nutzung F2 Hauptfunktion
+Nutzung F2        empfangen     63            Rückmeldung Nutzung F2
+---------         ---------     64            ---------
+---------         ---------     65            ---------
+---------         ---------     66            ---------
+---------         ---------     67            ---------
+---------         ---------     68            ---------
+Licht Foyer       senden        69            ---------
+________________________________________________________________________________
+
+F1 Jalousie oben  senden        70            Fahren
+F1 Jalousie oben  senden        71            Step
+F1 Jalousie oben  empfangen     72            Rückmeldung oben
+F1 Jalousie oben  empfangen     73            Rückmeldung unten
+---------         ---------     74            ---------
+F1 Jalousie unten senden        75            Fahren
+F1 Jalousie unten senden        76            Step
+F1 Jalousie unten empfangen     77            Rückmeldung oben
+F1 Jalousie unten empfangen     78            Rückmeldung unten
+---------         ---------     79            ---------
+
+
+F1 Jalousie Altar senden        80            Fahren
+F1 Jalousie Altar senden        81            Step
+F1 Jalousie Altar empfangen     82            Rückmeldung oben
+F1 Jalousie Altar empfangen     83            Rückmeldung unten
+---------         ---------     84            ---------
+F1 Rollo Altar    senden        85            Fahren
+F1 Rollo Altar    senden        86            Step
+F1 Rollo Altar    empfangen     87            Rückmeldung oben
+F1 Rollo Altar    empfangen     88            Rückmeldung unten
+---------         ---------     89            ---------
+
+
+F1 Dachfenster    senden        90            Fahren
+F1 Dachfenster    senden        91            Step
+F1 Dachfenster    empfangen     92            Rückmeldung AUF
+F1 Dachfenster    empfangen     93            Rückmeldung ZU
+---------         ---------     94            ---------
+F1 Fenster        senden        95            Fahren
+F1 Fenster        senden        96            Step
+F1 Fenster        empfangen     97            Rückmeldung AUF
+F1 Fenster        empfangen     98            Rückmeldung ZU
+---------         ---------     99            ---------
+
+
+F2 Jalousie       senden        100           Fahren
+F2 Jalousie       senden        101           Step
+F2 Jalousie       empfangen     102           Rückmeldung oben
+F2 Jalousie       empfangen     103           Rückmeldung unten
+---------         ---------     104           ---------
+F2 Fenster        senden        105           Fahren
+F2 Fenster        senden        106           Step
+F2 Fenster        empfangen     107           Rückmeldung AUF
+F2 Fenster        empfangen     108           Rückmeldung ZU
+---------         ---------     109           ---------

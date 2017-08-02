@@ -25,12 +25,12 @@
 #define KEY_JALOUSIEF1TOP Global::Key[3][3]     // Taster um die obere Jalousie in Forum 1 zu steuern
 #define KEY_JALOUSIEF1ROL Global::Key[3][2]     // Taster um das Rollo am Altar zu steuern
 #define KEY_WINDOWF1ROOF  Global::Key[3][1]     // Taster um die Dachfenster in Forum 1 zu steuern
-#define KEY_WINDOWF2      Global::Key[3][0]     // Taster um die Fenster in Forum 2 zu steuern
+#define KEY_JALOUSIEF2    Global::Key[3][0]     // Tatser um die Jalousien in Forum 2 zu steuern
 
 #define KEY_WINDOWDOWN    Global::Key[4][4]     // Taster um die Fenster und Jalousien zu schließen
 #define KEY_JALOUSIEF1BTN Global::Key[4][3]     // Taster um die untere Jalousie in Forum 1 zu steuern
 #define KEY_JALOUSIEF1ALT Global::Key[4][2]     // Taster um die Jalousie am Altar zu steuern
 #define KEY_WINDOWF1SIDE  Global::Key[4][1]     // Taster um die Seitenfenster in FOrum 1 zu steuern
-#define KEY_JALOUSIEF2    Global::Key[4][0]     // Tatser um die Jalousien in Forum 2 zu steuern
+#define KEY_WINDOWF2      Global::Key[4][0]     // Taster um die Fenster in Forum 2 zu steuern
 
 #endif

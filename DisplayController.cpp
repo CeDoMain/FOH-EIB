@@ -19,10 +19,10 @@ void DisplayController::Begin()
 
   // Events verknüpfen
   MessageTimeout.TimeIsUpEvent.Connect(this, &DisplayController::ClearScreen);
-  ErrorTimeout.TimeIsUpEvent.Connect(this, &DisplayController::NextError);
+  ErrorTimeout.TimeIsUpEvent.Connect(this, &DisplayController::ClearScreen);
   ErrorKey->Btn.ClickEvent.Connect(this, &DisplayController::NextError);
   ErrorKey->Btn.LongPressEvent.Connect(this, &DisplayController::AcknowledgeError);
-  ErrorKey->Btn.ActivatedEvent.Connect(this, &DisplayController::RestartErrorTimeout);
+  ErrorKey->Btn.ActivatedEvent.Connect([this] () { ErrorTimeout.Start(); });
 
   ErrorKey->Led.SetRatio(BiColorLED::RG_Green);
   ErrorKey->Led.On();
@@ -114,35 +114,42 @@ void DisplayController::SetIntensity(float intensity)
 void DisplayController::NextError()
 {
   // Nächsten Fehler in der Liste finden
-  const byte showedError = ShowedError;
+  const auto showedError = ShowedError;
+  
   Error* err = Errors.Find(
     [showedError](Error* err) -> bool { return err->Occurred && err->ID > showedError; });
+
+  Serial.println(showedError);
+
+  if (err == 0)
+    Serial.println(F("no selection"));
+  else
+    Serial.println(err->Name);
+
   if (err == 0)
   {
     // Es gibt keine nachfolgenden Fehler
-    if (ShowedError == -1
-        || (err = Errors.Find([](Error* err) -> bool { return err->Occurred; })))
+    if (ShowedError == -1 || (err = Errors.Find([](Error* err) -> bool { return err->Occurred; })) == 0)
     {
+      if (err == 0)
+        Serial.println(F("no selection"));
+      else
+        Serial.println(err->Name);
+
       // Es wurde von Anfang an gesucht, also sind keine Fehler vorhanden
       ClearScreen();
       ErrorKey->Led.SetRatio(BiColorLED::RG_Green);
       ErrorKey->Led.SetPulsePerSecond(0);
       return;
     }
-    else
-    {
-      // Es wurde ein nächster Fehler gefunden
-      ShowedError = err->ID;
-      ShowError();
-    }
+    // Es wurde von Anfang an gesucht und ein Fehler gefunden
   }
+  // Es wurde ein nächster Fehler gefunden
+  ShowedError = err->ID;
+  ShowError();
 }
 void DisplayController::AcknowledgeError()
 {
-  // Abbrechen, wenn kein Fehler angezeigt wird
-  if(ShowedError == -1)
-    return;
-
   if(*IsKeyActive)
   {
     // Schlüsselschalter aktiv, also alle Fehler löschen
@@ -150,6 +157,10 @@ void DisplayController::AcknowledgeError()
   }
   else
   {
+    // Abbrechen, wenn kein Fehler angezeigt wird
+    if(ShowedError == -1)
+      return;
+
     // Den angezeigten Fehler löschen
     const byte showedError = ShowedError;
     Errors.Find([showedError](Error* err) -> bool
@@ -185,10 +196,6 @@ void DisplayController::ShowError()
   PrintTwoLine(err->Name, TEXT_INCORRECT);
   ErrorTimeout.Start();
 }
-void DisplayController::RestartErrorTimeout()
-{
-  ErrorTimeout.Start();
-}
 void DisplayController::ClearScreen()
 {
   ErrorTimeout.Stop();
@@ -207,4 +214,12 @@ void DisplayController::PrintTwoLine(const __FlashStringHelper* msg1, const __Fl
     Lcd.setCursor(0, 1);
     Lcd.print(msg2);
   }
+}
+void DisplayController::DumpErrorList()
+{
+  Errors.ForEach([](Error* err)
+  {
+    Debug(F("E: %i \t %c "), err->ID, err->Occurred ? '+' : '-');
+    Serial.println(err->Name);
+  });
 }

@@ -89,6 +89,7 @@ void Global::Begin()
   KeyLockBtn.LongPressEvent.Connect(&Global::KeyLockActivate);
   KeyLockBtn.DeactivatedEvent.Connect(&Global::KeyLockDeactivate);
   Knx.ValueRecvEvent[KNX_GLOBAL_RAINALARM].Connect(&Global::RainAlarmRecv);
+  KEY_INFO.Btn.ClickEvent.Connect([&Disp]() { Disp.DumpErrorList(); });
 }
 
 void Global::Update()

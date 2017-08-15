@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include "LiquidCrystal.h"
 
+#include "Debug.h"
 #include "Timer.h"
 #include "NkkKey.h"
 #include "LinkedList.h"
@@ -28,9 +29,9 @@ private:
   NkkKey* ErrorKey;             // Taster zum Weiterschalten und Quittieren der Fehler
   Timer MessageTimeout;         // Timer, der Meldungen ausblendet
   Timer ErrorTimeout;           // Timer, der Fehler ausblendet
-  LinkedList<Error*> Errors;     // Liste mit registrierten Fehlern
+  LinkedList<Error*> Errors;    // Liste mit registrierten Fehlern
   byte RegisteredErrorCount;    // Anzahl der registrierten Fehler
-  char ShowedError;             // ID des anzuzeigenden Fehlers
+  short ShowedError;             // ID des anzuzeigenden Fehlers
   bool* IsKeyActive;            // Gibt an, ob der Schlüsselschalter aktiv ist
 
   // Konstruktor
@@ -62,17 +63,17 @@ public:
   // Ändert den Kontrast des Display [0;1]
   void SetContrast(float contrast);
 
+  // Schreibt Dump der Errorliste
+  void DumpErrorList();
+
 private:
   // Zeigt den Fehler mit der angegebenen ID an
   void ShowError();
 
-  // Startet den ClearScreen-Timeout neu
-  void RestartErrorTimeout();
-
   // Löscht das Display
   void ClearScreen();
 
-  // Zeigt die nächste Fehlermeldung an
+  // Zeigt die nächste Fehlermeldung an oder ändert auf grün
   void NextError();
 
   // Quittiert eine Fehlermeldung

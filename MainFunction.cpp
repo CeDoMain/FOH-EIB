@@ -82,7 +82,6 @@ void MainFunction::FunctionKnxObjectReceived(byte object, char* value)
   KnxObjectData* obj = GetRecvObject(object);
   if (obj != 0)
   {
-    Debug(F("ValueRecv: (%i) (%s)\n\r"), object, value);
     // Rückmeldung speichern und auf Korrektheit prüfen
     obj->Value = SIMKNX128::ParseBool(value);
     obj->IsCorrectValue = obj->Value == SendObj.Value;

@@ -74,6 +74,10 @@ void BeamerFunction::GetState()
 
 void BeamerFunction::FunctionKnxObjectReceived(byte object, char* value)
 {
+  // Nur wahre Rückmeldungen zulassen
+  if (!SIMKNX128::ParseBool(value))
+    return;
+
   BeamerStates newState = State;
 
   if (object == RecvWarmUp)

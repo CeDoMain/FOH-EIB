@@ -3,15 +3,16 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                "D:\\Dropbox\\Arduino Projekte\\libraries\\CeDoLib\\src",
+                "usr/include",
+                "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino",
+                "D:/Dropbox/Arduino Projekte/libraries/CeDoLib/src",
                 "${workspaceRoot}"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
-                    "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
-                    "D:\\Dropbox\\Arduino Projekte\\libraries\\CeDoLib\\src",
+                    "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino",
+                    "D:/Dropbox/Arduino Projekte/libraries/CeDoLib/src",
                     "${workspaceRoot}"
                 ]
             },

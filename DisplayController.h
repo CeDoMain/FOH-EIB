@@ -30,7 +30,7 @@ private:
   Timer ErrorTimeout;           // Timer, der Fehler ausblendet
   LinkedList<Error*> Errors;     // Liste mit registrierten Fehlern
   byte RegisteredErrorCount;    // Anzahl der registrierten Fehler
-  byte ShowedError;             // ID des anzuzeigenden Fehlers
+  char ShowedError;             // ID des anzuzeigenden Fehlers
   bool* IsKeyActive;            // Gibt an, ob der Schlüsselschalter aktiv ist
 
   // Konstruktor

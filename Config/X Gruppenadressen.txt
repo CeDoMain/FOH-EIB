@@ -11,17 +11,16 @@ Temperatur        empfangen     6             max
 Wind              empfangen     7             aktuell
 Windalarm         empfangen     8             Rückmeldung
 Regenalarm        empfangen     9             Rückmeldung
-
 ________________________________________________________________________________
 
 Audio             senden        10            Audio Hauptfunktion
-Audio             empfangen     11            Rückmeldung Audio 1
-Audio             empfangen     12            Rückmeldung Audio 2
----------         ---------     13            ---------
----------         ---------     14            ---------
----------         ---------     15            ---------
----------         ---------     16            ---------
----------         ---------     17            ---------
+Audio             empfangen     11            Rückmeldung Audio Verstärker 1
+Audio             empfangen     12            Rückmeldung Audio Verstärker 1
+Audio             empfangen     13            Rückmeldung Audio Verstärker 1
+Audio             empfangen     14            Rückmeldung Audio Verstärker 1
+Audio             empfangen     15            Rückmeldung Audio Verstärker 1
+Audio             empfangen     16            Rückmeldung Audio FOH
+Audio             empfangen     17            Rückmeldung Audio MixRack
 DMK               senden        18            DMK Hauptfunktion
 DMK               empfangen     19            Rückmeldung DMK
 ________________________________________________________________________________
@@ -93,8 +92,6 @@ F1 Jalousie unten senden        76            Step
 F1 Jalousie unten empfangen     77            Rückmeldung oben
 F1 Jalousie unten empfangen     78            Rückmeldung unten
 ---------         ---------     79            ---------
-
-
 F1 Jalousie Altar senden        80            Fahren
 F1 Jalousie Altar senden        81            Step
 F1 Jalousie Altar empfangen     82            Rückmeldung oben
@@ -105,8 +102,6 @@ F1 Rollo Altar    senden        86            Step
 F1 Rollo Altar    empfangen     87            Rückmeldung oben
 F1 Rollo Altar    empfangen     88            Rückmeldung unten
 ---------         ---------     89            ---------
-
-
 F1 Dachfenster    senden        90            Fahren
 F1 Dachfenster    senden        91            Step
 F1 Dachfenster    empfangen     92            Rückmeldung AUF
@@ -117,8 +112,6 @@ F1 Fenster        senden        96            Step
 F1 Fenster        empfangen     97            Rückmeldung AUF
 F1 Fenster        empfangen     98            Rückmeldung ZU
 ---------         ---------     99            ---------
-
-
 F2 Jalousie       senden        100           Fahren
 F2 Jalousie       senden        101           Step
 F2 Jalousie       empfangen     102           Rückmeldung oben

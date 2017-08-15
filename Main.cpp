@@ -57,12 +57,12 @@ Main::Main()
   // Rückmeldungen konfigurieren
   // [Name].AddRecvObj[empfangsObjekt], F("[Name max. 20 Zeichen]"));
   Audio.AddRecvObj(11, F("F32 Audio Verst. 1"));
-  Audio.AddRecvObj(11, F("F33 Audio Verst. 2"));
-  Audio.AddRecvObj(11, F("F34 Audio Verst. 3"));
-  Audio.AddRecvObj(11, F("F35 Audio Verst. 4"));
-  Audio.AddRecvObj(11, F("F36 Audio Verst. 5"));
-  Audio.AddRecvObj(11, F("F37 Audio FOH"));
-  Audio.AddRecvObj(11, F("F38 Audio MixRack"));
+  Audio.AddRecvObj(12, F("F33 Audio Verst. 2"));
+  Audio.AddRecvObj(13, F("F34 Audio Verst. 3"));
+  Audio.AddRecvObj(14, F("F35 Audio Verst. 4"));
+  Audio.AddRecvObj(15, F("F36 Audio Verst. 5"));
+  Audio.AddRecvObj(16, F("F37 Audio FOH"));
+  Audio.AddRecvObj(17, F("F38 Audio MixRack"));
 
   Video.AddRecvObj(21, F("F?? Video FOH"));
 

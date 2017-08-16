@@ -10,6 +10,7 @@
 #include "DisplayController.h"
 #include "NkkKey.h"
 #include "Debug.h"
+#include "MemoryFree.h"
 #include "Config/Connections.h"
 #include "Config/Keys.h"
 
@@ -24,6 +25,7 @@ public:
   static bool IsRaining;                // Gibt an, ob es regnet
   static DisplayController Disp;        // Displayverwaltung
   static SIMKNX128 Knx;                 // KNX-EIB Schnittstelle
+  static unsigned int LoopFps;          // Wiederholrate der Loop
 private:
   static Button KeyLockBtn;             // Schließkontakt des Schlüsselschalters
 

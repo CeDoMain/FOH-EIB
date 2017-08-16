@@ -56,6 +56,7 @@ NkkKey Global::Key[5][5] =
 };
 bool Global::IsKeyLockInactive = false;
 bool Global::IsRaining = false;
+unsigned int Global::LoopFps = 0;
 DisplayController Global::Disp = DisplayController(&KEY_ERROR, &Global::IsKeyLockInactive);
 SIMKNX128 Global::Knx = SIMKNX128();
 Button Global::KeyLockBtn = Button();
@@ -89,7 +90,19 @@ void Global::Begin()
   KeyLockBtn.LongPressEvent.Connect(&Global::KeyLockActivate);
   KeyLockBtn.DeactivatedEvent.Connect(&Global::KeyLockDeactivate);
   Knx.ValueRecvEvent[KNX_GLOBAL_RAINALARM].Connect(&Global::RainAlarmRecv);
-  KEY_INFO.Btn.ClickEvent.Connect([&Disp]() { Disp.DumpErrorList(); });
+  KEY_INFO.Btn.ClickEvent.Connect([]()
+  {
+    float mem = 100.0 - freeMemory() / 8186.0 * 100.0;
+
+    char line1[20];
+    char line2[20];
+    sprintf(line1, "RAM: %i.%i%% %ifps", (int)mem, (int)((mem - (int)mem) * 100), Global::LoopFps);
+    sprintf(line2, "Version: 2.1");
+    Global::Disp.DumpErrorList();
+    Global::Disp.ShowMessage(line1, line2);
+    Serial.println(line1);
+    Serial.println(line2);
+  });
 }
 
 void Global::Update()

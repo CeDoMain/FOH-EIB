@@ -4,9 +4,7 @@
 #include "Arduino.h"
 #include "Wire.h"
 
-#include "MemoryFree.h"
 #include "Debug.h"
-
 #include "Global.h"
 #include "MainFunction.h"
 #include "BeamerFunction.h"

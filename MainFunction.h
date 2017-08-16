@@ -64,7 +64,7 @@ private:
   void FunctionKnxObjectReceived(byte object, char* value);
 
   // Wird aufgerufen, wenn der Schaltvorgang ausgewertet werden soll (Korrektheit, Zurückschalten)
-  void Evaluate();
+  void Evaluate(bool generateErrors = false);
 
   // Findet das Rückmeldeobjekt anhand der KnxObjektID
   KnxObjectData* GetRecvObject(byte ObjectIndex);

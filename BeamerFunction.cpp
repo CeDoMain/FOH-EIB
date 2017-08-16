@@ -20,7 +20,7 @@ void BeamerFunction::Begin()
   // Delegates verknüpfen
   FunctionKey->Btn.LongPressEvent.Connect(this, &BeamerFunction::KeyLongPressed);
   SIMKNX128::AnyValueRecvEvent.Connect(this, &BeamerFunction::FunctionKnxObjectReceived);
-  SwitchTimeout.TimeIsUpEvent.Connect(this, &BeamerFunction::TimeoutOrRecvOk);
+  SwitchTimeout.TimeIsUpEvent.Connect(this, &BeamerFunction::Evaluate);
   GetStateTimer.TimeIsUpEvent.Connect(this, &BeamerFunction::GetState);
 }
 
@@ -97,14 +97,14 @@ void BeamerFunction::FunctionKnxObjectReceived(byte object, char* value)
     switch (State)
     {
       case WarmUp: Global::Disp.ShowMessage(TEXT_BEAMER_NOTIFY, TEXT_BEAMER_BOOTING); break;
-      case Ready: TimeoutOrRecvOk(); break;
+      case Ready: Evaluate(); break;
       case CountDown: Global::Disp.ShowMessage(TEXT_BEAMER_NOTIFY, TEXT_BEAMER_COUNTDOWN); break;
       case CoolDown: Global::Disp.ShowMessage(TEXT_BEAMER_NOTIFY, TEXT_BEAMER_COOLDOWN); break;
     }
   }
 }
 
-void BeamerFunction::TimeoutOrRecvOk()
+void BeamerFunction::Evaluate()
 {
   SwitchTimeout.Stop();
   GetStateTimer.Stop();

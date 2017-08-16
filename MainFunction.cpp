@@ -19,7 +19,7 @@ void MainFunction::Begin()
   // Delegates verknüpfen
   FunctionKey->Btn.LongPressEvent.Connect(this, &MainFunction::KeyLongPressed);
   SIMKNX128::AnyValueRecvEvent.Connect(this, &MainFunction::FunctionKnxObjectReceived);
-  SwitchTimeout.TimeIsUpEvent.Connect(this, &MainFunction::Evaluate);
+  SwitchTimeout.TimeIsUpEvent.Connect([this]() { Evaluate(); });
 }
 
 void MainFunction::Update()
@@ -100,7 +100,7 @@ void MainFunction::FunctionKnxObjectReceived(byte object, char* value)
 
     // Tritt ein Fehler nicht beim Schalten auf, muss die Hauptfunktion neu ausgewertet werden
     if (!obj->IsCorrectValue && !IsSwitching)
-      Evaluate();
+      Evaluate(true);
 
     // Wenn alle Rückmeldungen richtig sind, kann die Hauptfunktion bereits ausgewertet werden
     bool AllCorrect = true;
@@ -110,18 +110,18 @@ void MainFunction::FunctionKnxObjectReceived(byte object, char* value)
   }
 }
 
-void MainFunction::Evaluate()
+void MainFunction::Evaluate(bool generateErrors = false)
 {
   SwitchTimeout.Stop();
   bool AllCorrect = true;
   bool AnyCorrect = false;
   RecvObj->ForEach([&AllCorrect, &AnyCorrect](KnxObjectData* obj)
-    {
-      if (obj->IsCorrectValue)
-        AnyCorrect = true;
-      else
-        AllCorrect = false;
-    });
+  {
+    if (obj->IsCorrectValue)
+      AnyCorrect = true;
+    else
+      AllCorrect = false;
+  });
   if (AllCorrect)
   {
     if (SendObj.Name != 0)
@@ -129,11 +129,14 @@ void MainFunction::Evaluate()
   }
   else if (AnyCorrect)
   {
-    RecvObj->ForEach([](KnxObjectData* obj)
+    if (!generateErrors)
     {
-      if (!obj->IsCorrectValue)
-        Global::Disp.ErrorOccured(obj->ErrorID);
-    });
+      RecvObj->ForEach([](KnxObjectData* obj)
+      {
+        if (!obj->IsCorrectValue)
+          Global::Disp.ErrorOccured(obj->ErrorID);
+      });
+    }
   }
   else
   {

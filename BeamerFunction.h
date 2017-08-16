@@ -62,7 +62,7 @@ private:
   void FunctionKnxObjectReceived(byte object, char* value);
 
   // Wird aufgerufen, wenn ein Timeout ausgelöst wurde oder alle Rückmeldungen korrekt sind
-  void TimeoutOrRecvOk();
+  void Evaluate();
 
 };
 

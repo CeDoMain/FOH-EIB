@@ -1,4 +1,4 @@
-- Programmierung von Cedric Donges
+- Programmierung von Cedric Donges 2016/17
 
 - Auf der Platine gibt es drei Fehler:
   Schraubklemm Nr.7 an PWM6

@@ -23,4 +23,3 @@ void loop()
 
   Global::LoopFps = 1000.0 / ( millis() - TimeStamp);
 }
-

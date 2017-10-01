@@ -28,7 +28,6 @@ private:
   const byte RecvReady;
   const byte RecvCountDown;
   const byte RecvCoolDown;
-  const float PulsePerSecond;       // Gibt an, wie schnell die LED bei einer Funktionsänderung blinkt
   Timer SwitchTimeout;              // Löst nach einer gewissen Zeit einen Timeout aus
   Timer GetStateTimer;              // Fragt nach einer gewissen Zeit den Zustand des Beamers ab
   const byte ErrorID;               // ID, die den entsprechenden Fehler im DisplayController angibt

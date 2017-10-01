@@ -29,8 +29,7 @@ private:
   Timer SwitchTimeout;                      // Löst nach einer gewissen Zeit einen Timeout aus
   KnxObjectData SendObj;                    // KNX Objekt, an das der Schaltzustand gesendet wird
   LinkedList<KnxObjectData*>* RecvObj;      // KNX Objekte, die Rückmeldung geben sollen
-  const float PulsePerSecond;               // Gibt an, wie schnell die LED bei einer Funktionsänderung blinkt
-
+  
   // Konstruktor
 public:
   MainFunction(NkkKey* functionKey, const byte functionKnxObjectIndex,

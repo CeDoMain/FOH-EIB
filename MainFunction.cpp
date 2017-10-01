@@ -4,8 +4,7 @@
   : CanActivate(0), FunctionKey(functionKey), IsSwitching(false),
     SwitchTimeout(timeout),
     SendObj({ functionKnxObjectIndex, false, true, name, Global::Disp.RegisterError(name)}),
-    RecvObj(new LinkedList<KnxObjectData*>()),
-    PulsePerSecond(TIME_PULSERATE)
+    RecvObj(new LinkedList<KnxObjectData*>())
 {
 
 }
@@ -69,7 +68,7 @@ void MainFunction::SwitchFunction(bool newValue)
   if (SendObj.Name != 0)
     Global::Disp.ShowMessage(SendObj.Name, SendObj.Value ? TEXT_SWITCHING_ON : TEXT_SWITCHING_OFF);
   FunctionKey->Led.SetRatio(SendObj.Value ? BiColorLED::RG_Green : BiColorLED::RG_Red);
-  FunctionKey->Led.SetPulsePerSecond(PulsePerSecond);
+  FunctionKey->Led.SetPulsePerSecond(TIME_PULSERATE);
   SwitchTimeout.Start();
   if (!newValue)
     SwitchingOffEvent();

@@ -4,7 +4,7 @@ BeamerFunction::BeamerFunction(NkkKey* functionKey)
   : CanActivate(0), FunctionKey(functionKey), State(BeamerStates::Ready), IsSwitchedOn(false),
     SendSwitch(KNX_BEAMER_SWITCH), SendGetState(KNX_BEAMER_GETSTATE),
     RecvWarmUp(KNX_BEAMER_WARMUP), RecvReady(KNX_BEAMER_READY), RecvCountDown(KNX_BEAMER_COUNTDOWN), RecvCoolDown(KNX_BEAMER_COOLDOWN),
-    PulsePerSecond(TIME_PULSERATE), SwitchTimeout(TIME_BEAMER_TIMEOUT),
+    SwitchTimeout(TIME_BEAMER_TIMEOUT),
     GetStateTimer(TIME_BEAMER_GETSTATE),
     ErrorID(Global::Disp.RegisterError(TEXT_BEAMER))
 {
@@ -61,7 +61,7 @@ IsSwitchedOn = newValue;
 Global::Disp.ShowMessage(TEXT_BEAMER,
   IsSwitchedOn ? TEXT_SWITCHING_ON : TEXT_SWITCHING_OFF);
 FunctionKey->Led.SetRatio(IsSwitchedOn ? BiColorLED::RG_Green : BiColorLED::RG_Red);
-FunctionKey->Led.SetPulsePerSecond(PulsePerSecond);
+FunctionKey->Led.SetPulsePerSecond(TIME_PULSERATE);
 SwitchTimeout.Start();
 Global::Knx.SendBool(SendSwitch, IsSwitchedOn);
 GetStateTimer.Start();

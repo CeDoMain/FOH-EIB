@@ -29,8 +29,7 @@ private:
   LinkedList<KnxObjectData*>* Windows;      // Speichert die Fenster und Jalousien
   KnxObjectData* SelectedWindow;            // Zeiger auf das ausgewählte Fenster oder Jalousie
   Timer DeselectTimer;                      // Löscht die Auswahl nach einer bestimmten Zeit
-  const float SelectionPulseRate;           // Geschwindigkeit mit der die Auswahltasten bei einer Auswahl blinken
-
+  
   // Konstruktor
 public:
   WindowController(NkkKey* upKey, NkkKey* downKey);

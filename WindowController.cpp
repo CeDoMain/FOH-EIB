@@ -2,7 +2,7 @@
 
 WindowController::WindowController(NkkKey* upKey, NkkKey* downKey)
   : UpKey(upKey), DownKey(downKey), Windows(new LinkedList<KnxObjectData*>()),
-    SelectedWindow(0), DeselectTimer(TIME_WINDOW_DESELECT), SelectionPulseRate(TIME_PULSERATE)
+    SelectedWindow(0), DeselectTimer(TIME_WINDOW_DESELECT)
 {
 
 }
@@ -89,7 +89,7 @@ void WindowController::Select(KnxObjectData* obj)
     SelectedWindow = obj;
 
     // Auswahltaste blinken, die Steuertasten farbig beleuchten und Mitteilung senden
-    SelectedWindow->Key->Led.SetPulsePerSecond(SelectionPulseRate);
+    SelectedWindow->Key->Led.SetPulsePerSecond(TIME_PULSERATE);
     UpKey->Led.SetRatio(obj->IsColorReversed ? BiColorLED::RG_Red : BiColorLED::RG_Green);
     DownKey->Led.SetRatio(obj->IsColorReversed ? BiColorLED::RG_Green : BiColorLED::RG_Red);
     UpKey->Led.On();

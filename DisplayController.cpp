@@ -119,23 +119,11 @@ void DisplayController::NextError()
   Error* err = Errors.Find(
     [showedError](Error* err) -> bool { return err->Occurred && err->ID > showedError; });
 
-  Serial.println(showedError);
-
-  if (err == 0)
-    Serial.println(F("no selection"));
-  else
-    Serial.println(err->Name);
-
   if (err == 0)
   {
     // Es gibt keine nachfolgenden Fehler
     if (ShowedError == -1 || (err = Errors.Find([](Error* err) -> bool { return err->Occurred; })) == 0)
     {
-      if (err == 0)
-        Serial.println(F("no selection"));
-      else
-        Serial.println(err->Name);
-
       // Es wurde von Anfang an gesucht, also sind keine Fehler vorhanden
       ClearScreen();
       ErrorKey->Led.SetRatio(BiColorLED::RG_Green);

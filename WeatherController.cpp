@@ -1,7 +1,5 @@
 #include "WeatherController.h"
 
-#define SplitFloat(x) ((int)x,(int)((x-(int)x)*100))
-
 WeatherController::WeatherController(NkkKey* weatherKey)
   : WeatherKey(weatherKey),
     SendLightFoyer(KNX_WEATHER_FOYERLIGHTON),
@@ -25,11 +23,11 @@ void WeatherController::Begin()
   WeatherKey->Led.On();
 
   // Delegates verknüpfen
-  WeatherKey->Btn.LongPressEvent.Connect(this, &WeatherController::SwitchFoyerLightOn);
-  WeatherKey->Btn.ClickEvent.Connect(this, &WeatherController::RequestWeather);
+  WeatherKey->Btn.LongPressEvent = new Delegate<>(this, &WeatherController::SwitchFoyerLightOn);
+  WeatherKey->Btn.ClickEvent = new Delegate<>(this, &WeatherController::RequestWeather);
+  DisplayDateTime.TimeIsUpEvent = new Delegate<>(this, &WeatherController::ShowDateTime);
+  DisplayWeather.TimeIsUpEvent = new Delegate<>(this, &WeatherController::ShowWeather);
   SIMKNX128::AnyValueRecvEvent.Connect(this, &WeatherController::WeatherKnxObjectReceived);
-  DisplayDateTime.TimeIsUpEvent.Connect(this, &WeatherController::ShowDateTime);
-  DisplayWeather.TimeIsUpEvent.Connect(this, &WeatherController::ShowWeather);
 }
 void WeatherController::Update()
 {

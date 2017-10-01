@@ -27,32 +27,30 @@ Main::Main()
   // um herauszubekommen ob eine Funktion geschaltet werden darf
   // Rückmeldung true: darf geschaltet werden (andernfalls nicht)
   // Meldungen auf dem Display bei Sperre sind erlaubt und erwünscht
-  MasterAudio = Delegate<bool>([this]() -> bool
+  MasterAudio = new Delegate<bool>([this]() -> bool
   {
     if (Audio.IsOn()) { return true; }
     else { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("Audio n. aktiv")); return false; }
   });
-  MasterVideo = Delegate<bool>([this]() -> bool
+  MasterVideo = new Delegate<bool>([this]() -> bool
   {
     if (Video.IsOn()) { return true; }
     else { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("Video n. aktiv")); return false; }
   });
-  MasterNutzungF1 = Delegate<bool>([this]() -> bool
+  MasterNutzungF1 = new Delegate<bool>([this]() -> bool
   {
     if (NutzungF1.IsOn()) { return true; }
     else { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("Nutzung F1 n. aktiv")); return false; }
   });
-  MasterNutzungF2 = Delegate<bool>([this]() -> bool
+  MasterNutzungF2 = new Delegate<bool>([this]() -> bool
   {
     if (NutzungF2.IsOn()) { return true; }
     else { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("Nutzung F2 n. aktiv")); return false; }
   });
-  MasterNutzungF1AndRain = Delegate<bool>([this]() -> bool
+  MasterRain = new Delegate<bool>([this]() -> bool
   {
-    if (Global::IsRaining) { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("es regnet")); return false; }
-    else if (!NutzungF1.IsOn()) { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("Nutzung F1 n. aktiv")); return false; }
-    else { return true; }
-    return false;
+    if (!Global::IsRaining) { return true; }
+    else { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("es regnet")); return false; }
   });
   // Rückmeldungen konfigurieren
   // [Name].AddRecvObj[empfangsObjekt], F("[Name max. 20 Zeichen]"));
@@ -80,7 +78,7 @@ Main::Main()
   //   [Rückmeldung-Offen-Objekt], [Rückmeldung-Geschlossen-Objekt]
   //   F("[Name max. 20 Zeichen]"), &Global::Key[y][x],
   //   [Aktivierungsbedingung => 0 oder z.B. &MasterNutzungF1]});
-  WinControl.AddWindow(90, 91, 92, 93, F("F1 Fenster Dach"), &KEY_WINDOWF1ROOF, 0);
+  WinControl.AddWindow(90, 91, 92, 93, F("F1 Fenster Dach"), &KEY_WINDOWF1ROOF, MasterRain);
   WinControl.AddWindow(95, 96, 97, 98, F("F1 Fenster Seite"), &KEY_WINDOWF1SIDE, 0);
   WinControl.AddWindow(105, 106, 107, 108, F("F2 Fenster"), &KEY_WINDOWF2, 0);
 
@@ -97,12 +95,12 @@ Main::Main()
 
   // Schalt-Abhängigkeiten zwischen Hauptfunktionen
   // [Name der Slavefunktion].CanActivate = &[Aktivierungsbedingung => Zeile entfernen oder z.B. MasterNutzungF1];
-  NutzungF2.CanActivate = &MasterNutzungF1;
-  DMK.CanActivate = &MasterAudio;
-  Livestream.CanActivate = &MasterVideo;
-  SeWo.CanActivate = &MasterVideo;
-  Pflegeheim.CanActivate = &MasterVideo;
-  Beamer.CanActivate = &MasterVideo;
+  NutzungF2.CanActivate = MasterNutzungF1;
+  DMK.CanActivate = MasterAudio;
+  Livestream.CanActivate = MasterVideo;
+  SeWo.CanActivate = MasterVideo;
+  Pflegeheim.CanActivate = MasterVideo;
+  Beamer.CanActivate = MasterVideo;
 }
 
 void Main::Begin()

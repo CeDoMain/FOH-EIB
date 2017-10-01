@@ -17,9 +17,9 @@ void MainFunction::Begin()
   FunctionKey->Led.On();
 
   // Delegates verknüpfen
-  FunctionKey->Btn.LongPressEvent.Connect(this, &MainFunction::KeyLongPressed);
+  FunctionKey->Btn.LongPressEvent = new Delegate<>(this, &MainFunction::KeyLongPressed);
   SIMKNX128::AnyValueRecvEvent.Connect(this, &MainFunction::FunctionKnxObjectReceived);
-  SwitchTimeout.TimeIsUpEvent.Connect([this]() { Evaluate(); });
+  SwitchTimeout.TimeIsUpEvent = new Delegate<>([this]() { Evaluate(); });
 }
 
 void MainFunction::Update()
@@ -110,7 +110,7 @@ void MainFunction::FunctionKnxObjectReceived(byte object, char* value)
   }
 }
 
-void MainFunction::Evaluate(bool generateErrors = false)
+void MainFunction::Evaluate(bool generateErrors)
 {
   SwitchTimeout.Stop();
   bool AllCorrect = true;

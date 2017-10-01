@@ -5,7 +5,7 @@ BeamerFunction::BeamerFunction(NkkKey* functionKey)
     SendSwitch(KNX_BEAMER_SWITCH), SendGetState(KNX_BEAMER_GETSTATE),
     RecvWarmUp(KNX_BEAMER_WARMUP), RecvReady(KNX_BEAMER_READY), RecvCountDown(KNX_BEAMER_COUNTDOWN), RecvCoolDown(KNX_BEAMER_COOLDOWN),
     PulsePerSecond(TIME_PULSERATE), SwitchTimeout(TIME_BEAMER_TIMEOUT),
-    GetStateTimer(TIME_BEAMER_GETSTATE, true),
+    GetStateTimer(TIME_BEAMER_GETSTATE),
     ErrorID(Global::Disp.RegisterError(TEXT_BEAMER))
 {
 
@@ -18,10 +18,10 @@ void BeamerFunction::Begin()
   FunctionKey->Led.On();
 
   // Delegates verknüpfen
-  FunctionKey->Btn.LongPressEvent.Connect(this, &BeamerFunction::KeyLongPressed);
+  FunctionKey->Btn.LongPressEvent = new Delegate<>(this, &BeamerFunction::KeyLongPressed);
+  SwitchTimeout.TimeIsUpEvent = new Delegate<>(this, &BeamerFunction::Evaluate);
+  GetStateTimer.TimeIsUpEvent = new Delegate<>(this, &BeamerFunction::GetState);
   SIMKNX128::AnyValueRecvEvent.Connect(this, &BeamerFunction::FunctionKnxObjectReceived);
-  SwitchTimeout.TimeIsUpEvent.Connect(this, &BeamerFunction::Evaluate);
-  GetStateTimer.TimeIsUpEvent.Connect(this, &BeamerFunction::GetState);
 }
 
 void BeamerFunction::Update()
@@ -70,6 +70,7 @@ GetStateTimer.Start();
 void BeamerFunction::GetState()
 {
   Global::Knx.SendBool(SendGetState, true);
+  GetStateTimer.Start();
 }
 
 void BeamerFunction::FunctionKnxObjectReceived(byte object, char* value)

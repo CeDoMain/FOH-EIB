@@ -18,9 +18,9 @@ void WindowController::Begin()
       obj->Key->Led.SetRatio(BiColorLED::RG_Yellow);
       obj->Key->Led.SetIntensity(1);
       obj->Key->Led.On();
-      obj->Key->Btn.ClickEvent.Connect([this, obj]() { Select(obj); });
-      Global::Knx.ValueRecvEvent[obj->UpTriggerKnxObjectIndex]
-        .Connect([this, obj](char* value)
+      obj->Key->Btn.ClickEvent = new Delegate<>([this, obj]() { Select(obj); });
+      Global::Knx.ValueRecvEvent[obj->UpTriggerKnxObjectIndex] =
+        new Delegate<void, char*>([this, obj](char* value)
         {
           // Rückmeldung über oberen Anschlag
           obj->Key->Led.SetRatio(
@@ -28,8 +28,8 @@ void WindowController::Begin()
             ? (obj->IsColorReversed ? BiColorLED::RG_Red : BiColorLED::RG_Green)
             : BiColorLED::RG_Yellow);
         });
-      Global::Knx.ValueRecvEvent[obj->DownTriggerKnxObjectIndex]
-        .Connect([this, obj](char* value)
+      Global::Knx.ValueRecvEvent[obj->DownTriggerKnxObjectIndex] =
+        new Delegate<void, char*>([this, obj](char* value)
         {
           // Rückmeldung über oberen Anschlag
           obj->Key->Led.SetRatio(
@@ -38,13 +38,13 @@ void WindowController::Begin()
             : BiColorLED::RG_Yellow);
         });
     });
-  DeselectTimer.TimeIsUpEvent.Connect(this, &WindowController::Deselect);
-  UpKey->Btn.ClickEvent.Connect(this, &WindowController::StepUp);
-  UpKey->Btn.LongPressEvent.Connect(this, &WindowController::MoveUp);
-  UpKey->Btn.ActivatedEvent.Connect([this](){ DeselectTimer.Start(); });
-  DownKey->Btn.ClickEvent.Connect(this, &WindowController::StepDown);
-  DownKey->Btn.LongPressEvent.Connect(this, &WindowController::MoveDown);
-  DownKey->Btn.ActivatedEvent.Connect([this](){ DeselectTimer.Start(); });
+  DeselectTimer.TimeIsUpEvent = new Delegate<>(this, &WindowController::Deselect);
+  UpKey->Btn.ClickEvent = new Delegate<>(this, &WindowController::StepUp);
+  UpKey->Btn.LongPressEvent = new Delegate<>(this, &WindowController::MoveUp);
+  UpKey->Btn.ActivatedEvent = new Delegate<>([this](){ DeselectTimer.Start(); });
+  DownKey->Btn.ClickEvent = new Delegate<>(this, &WindowController::StepDown);
+  DownKey->Btn.LongPressEvent = new Delegate<>(this, &WindowController::MoveDown);
+  DownKey->Btn.ActivatedEvent = new Delegate<>([this](){ DeselectTimer.Start(); });
 }
 void WindowController::Update()
 {

@@ -18,11 +18,11 @@ void DisplayController::Begin()
   Lcd.clear();
 
   // Events verknüpfen
-  MessageTimeout.TimeIsUpEvent.Connect(this, &DisplayController::ClearScreen);
-  ErrorTimeout.TimeIsUpEvent.Connect(this, &DisplayController::ClearScreen);
-  ErrorKey->Btn.ClickEvent.Connect(this, &DisplayController::NextError);
-  ErrorKey->Btn.LongPressEvent.Connect(this, &DisplayController::AcknowledgeError);
-  ErrorKey->Btn.ActivatedEvent.Connect([this] () { ErrorTimeout.Start(); });
+  MessageTimeout.TimeIsUpEvent = new Delegate<>(this, &DisplayController::ClearScreen);
+  ErrorTimeout.TimeIsUpEvent = new Delegate<>(this, &DisplayController::ClearScreen);
+  ErrorKey->Btn.ClickEvent = new Delegate<>(this, &DisplayController::NextError);
+  ErrorKey->Btn.LongPressEvent = new Delegate<>(this, &DisplayController::AcknowledgeError);
+  ErrorKey->Btn.ActivatedEvent = new Delegate<>([this] () { ErrorTimeout.Start(); });
 
   ErrorKey->Led.SetRatio(BiColorLED::RG_Green);
   ErrorKey->Led.On();

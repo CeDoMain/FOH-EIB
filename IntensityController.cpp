@@ -11,10 +11,10 @@ IntensityController::IntensityController(NkkKey* intensityKey)
 void IntensityController::Begin()
 {
   // Events verknüpfen
-  DimmerTimeout.TimeIsUpEvent.Connect(this, &IntensityController::DimmIntensity);
-  IntensityKey->Btn.ClickEvent.Connect(this, &IntensityController::SwitchIntensity);
+  DimmerTimeout.TimeIsUpEvent = new Delegate<>(this, &IntensityController::DimmIntensity);
+  IntensityKey->Btn.ClickEvent = new Delegate<>(this, &IntensityController::SwitchIntensity);
+  Fade.FadeEvent = new Delegate<void, float>(this, &IntensityController::FadeChanged);
   Trigger::AnyActiveEvent.Connect(this, &IntensityController::WakeUp);
-  Fade.FadeEvent.Connect(this, &IntensityController::FadeChanged);
 
   BiColorLED::SetGlobalIntensity(0);
   Fade.Start(WakeUpTime, 0, ActiveIntensity);

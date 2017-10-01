@@ -87,17 +87,17 @@ void Global::Begin()
   }
   Disp.Begin();
   Knx.Begin();
-  KeyLockBtn.LongPressEvent.Connect(&Global::KeyLockActivate);
-  KeyLockBtn.DeactivatedEvent.Connect(&Global::KeyLockDeactivate);
-  Knx.ValueRecvEvent[KNX_GLOBAL_RAINALARM].Connect(&Global::RainAlarmRecv);
-  KEY_INFO.Btn.ClickEvent.Connect([]()
+  KeyLockBtn.LongPressEvent = new Delegate<>(&Global::KeyLockActivate);
+  KeyLockBtn.DeactivatedEvent = new Delegate<>(&Global::KeyLockDeactivate);
+  Knx.ValueRecvEvent[KNX_GLOBAL_RAINALARM] = new Delegate<void, char*>(&Global::RainAlarmRecv);
+  KEY_INFO.Btn.ClickEvent = new Delegate<>([]()
   {
     float mem = 100.0 - freeMemory() / 8186.0 * 100.0;
 
     char line1[20];
     char line2[20];
     sprintf(line1, "RAM: %i.%i%% %ifps", (int)mem, (int)((mem - (int)mem) * 100), Global::LoopFps);
-    sprintf(line2, "Version: 2.1");
+    sprintf(line2, "Version: 2.2");
     Global::Disp.DumpErrorList();
     Global::Disp.ShowMessage(line1, line2);
     Serial.println(line1);

@@ -69,7 +69,7 @@ void WeatherController::WeatherKnxObjectReceived(byte object, char* value)
       {
           WindAlarm = true;
           WeatherKey->Led.SetRatio(BiColorLED::RG_Red);
-          Global::Disp.ShowMessage(F("Windalarm - Bitte"), F("Jalousien öffnen"));
+          Global::Disp.ShowMessage(F("Windalarm - Bitte"), F("Jalousien \xEFffnen"));
       }
       else
       {
@@ -135,6 +135,6 @@ void WeatherController::ShowAlarms()
 {
   char Line1[20], Line2[20];
   sprintf(Line1, "Windalarm: %s", WindAlarm ? "ja" : "nein");
-  sprintf(Line1, "Regenalarm: %s", RainAlarm ? "ja" : "nein");
+  sprintf(Line2, "Regenalarm: %s", RainAlarm ? "ja" : "nein");
   Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
 }

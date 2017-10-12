@@ -8,15 +8,15 @@ WindowController::WindowController(NkkKey* upKey, NkkKey* downKey)
 }
 void WindowController::Begin()
 {
-  UpKey->Led.SetIntensity(1);
+  UpKey->Led.SetIntensity(10000);
   UpKey->Led.Off();
 
-  DownKey->Led.SetIntensity(1);
+  DownKey->Led.SetIntensity(10000);
   DownKey->Led.Off();
   Windows->ForEach([this](KnxObjectData* obj)
     {
       obj->Key->Led.SetRatio(BiColorLED::RG_Yellow);
-      obj->Key->Led.SetIntensity(1);
+      obj->Key->Led.SetIntensity(10000);
       obj->Key->Led.On();
       obj->Key->Btn.ClickEvent = new Delegate<>([this, obj]() { Select(obj); });
       Global::Knx.ValueRecvEvent[obj->UpTriggerKnxObjectIndex] =

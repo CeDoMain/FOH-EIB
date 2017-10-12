@@ -5,10 +5,10 @@
 // y => Platinennummer
 // x => Tasternummer (links=4, rechts=0)
 
-#define KEY_ERROR         Global::Key[0][4]     // Taster um Fehlermeldungen anzuzeigen und zu löschen
+#define KEY_ERROR         Global::Key[0][4]     // Taster um Fehlermeldungen anzuzeigen und zu löschen (ohne schlüssel: eine löschen / mit schlüssel: alle löschen)
 #define KEY_INTENSITY     Global::Key[0][3]     // Taster um die Helligkeit des Displays und der Taster einzustellen
 #define KEY_WEATHER       Global::Key[0][2]     // Taster um Uhrzeit und Wetter abzufragen, bzw. bei langem Druck das Foyerlicht einzuschalten
-#define KEY_FOHLIGHT      Global::Key[0][1]     // Taster um Licht unter dem FOH zu schalten
+#define KEY_FOHLIGHT      Global::Key[0][1]     // Taster um Licht unter dem FOH zu schalten (langer druck)
 #define KEY_INFO          Global::Key[0][0]     // Taster um Informationen über den Zustand der Software abzufragen
 
 #define KEY_AUDIO         Global::Key[1][4]     // Taster für die Audiohauptfunktion

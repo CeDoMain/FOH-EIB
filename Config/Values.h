@@ -12,7 +12,7 @@
 #define LGHT_DIMM_CONTRAST            0.4       // Standardkontrast
 #define LGHT_DIMM_ACTIVEINTENSITY     10000     // Standardhelligkeit bei Aktivierung [0;10000]
 #define LGHT_DIMM_DIMMEDINTENSITY     100       // Standardhelligkeit nach Dimmen der Anzeigen [0;10000]
-#define TIME_DIMM_TIMEOUT             10000     // Zeit in ms nach der die Anzeigen gedimmt werden
+#define TIME_DIMM_TIMEOUT             15000     // Zeit in ms nach der die Anzeigen gedimmt werden
 #define TIME_DIMM_DIMMTIME            2000      // Zeit in ms in der die Anzeigen gedimmt werden
 #define TIME_DIMM_WAKEUPTIME          200       // Zeit in ms in der die Anzeigen aktiviert werden
 
@@ -21,6 +21,6 @@
 
 #define TIME_WINDOW_DESELECT          5000      // Zeit in ms, nach der ein gewähltes Fenster oder eine Jalousie wieder abgewählt wird
 
-#define TIME_PULSERATE                0.75      // Pulsiergeschwindigkeit in P/s aller blinkenden Taster
+#define TIME_PULSERATE                0.75      // Pulsrate aller blinkenden Taster in P/s 
 
 #endif

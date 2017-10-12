@@ -11,7 +11,7 @@ class IntensityController
 private:
   NkkKey* IntensityKey;               // Taster, der Helligkeit und Kontrast steuert
   Timer DimmerTimeout;                // Timer, der Taster und Anzeige dimmt
-  Fader<decimal> Fade;                // Fader, der Taster und Anzeige dimmt
+  Fader Fade;                         // Fader, der Taster und Anzeige dimmt
   decimal ActiveIntensity;            // Helligkeit nach Tastendruck
 
   // Konstruktor

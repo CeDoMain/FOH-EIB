@@ -88,7 +88,13 @@ void Global::Begin()
   Knx.Begin();
   KeyLockBtn.LongPressEvent = new Delegate<>(&Global::KeyLockActivate);
   KeyLockBtn.DeactivatedEvent = new Delegate<>(&Global::KeyLockDeactivate);
-  KEY_FOHLIGHT.Btn.ClickEvent = new Delegate<>([]()
+  KEY_FOHLIGHT.Led.SetRatio(BiColorLED::RG_Orange);
+  KEY_FOHLIGHT.Led.SetIntensity(10000);
+  KEY_FOHLIGHT.Led.On();
+  KEY_INFO.Led.SetRatio(BiColorLED::RG_Orange);
+  KEY_INFO.Led.SetIntensity(10000);
+  KEY_INFO.Led.On();
+  KEY_FOHLIGHT.Btn.LongPressEvent = new Delegate<>([]()
   {
     static bool LightOn = false;
     LightOn = !LightOn;
@@ -102,7 +108,7 @@ void Global::Begin()
     char line1[20];
     char line2[20];
     sprintf(line1, "RAM: %i.%i%% %ifps", (int)mem, (int)((mem - (int)mem) * 100), Global::LoopFps);
-    sprintf(line2, "Version: 2.3");
+    sprintf(line2, "Version: 2.4");
     Global::Disp.DumpErrorList();
     Global::Disp.ShowMessage(line1, line2);
     Serial.println(line1);

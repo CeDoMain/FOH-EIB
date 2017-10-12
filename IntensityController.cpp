@@ -31,7 +31,7 @@ void IntensityController::Update()
 void IntensityController::FadeChanged(decimal value)
 {
   BiColorLED::SetGlobalIntensity(value);
-  Global::Disp.SetIntensity(value);
+  Global::Disp.SetIntensity(value / 10000.0);
 }
 
 void IntensityController::DimmIntensity()

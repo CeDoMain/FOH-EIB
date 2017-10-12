@@ -47,11 +47,7 @@ Main::Main()
     if (NutzungF2.IsOn()) { return true; }
     else { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("Nutzung F2 n. aktiv")); return false; }
   });
-  MasterRain = new Delegate<bool>([this]() -> bool
-  {
-    if (!Global::IsRaining) { return true; }
-    else { Global::Disp.ShowMessage(TEXT_NOT_AVAILABLE, F("es regnet")); return false; }
-  });
+
   // Rückmeldungen konfigurieren
   // [Name].AddRecvObj[empfangsObjekt], F("[Name max. 20 Zeichen]"));
   Audio.AddRecvObj(11, F("F32 Audio Verst. 1"));
@@ -78,9 +74,9 @@ Main::Main()
   //   [Rückmeldung-Offen-Objekt], [Rückmeldung-Geschlossen-Objekt]
   //   F("[Name max. 20 Zeichen]"), &Global::Key[y][x],
   //   [Aktivierungsbedingung => 0 oder z.B. &MasterNutzungF1]});
-  WinControl.AddWindow(90, 91, 92, 93, F("F1 Fenster Dach"), &KEY_WINDOWF1ROOF, MasterRain);
+  WinControl.AddWindow(90, 91, 92, 93, F("F1 Fenster Dach"), &KEY_WINDOWF1ROOF, 0);
   WinControl.AddWindow(95, 96, 97, 98, F("F1 Fenster Seite"), &KEY_WINDOWF1SIDE, 0);
-  WinControl.AddWindow(105, 106, 107, 108, F("F2 Fenster"), &KEY_WINDOWF2, 0);
+  WinControl.AddWindow(105, 106, 107, 108, F("F2 Fenster"), &KEY_WINDOWF2, MasterNutzungF2);
 
   // Jalousiesteuerung konfigurieren
   // WinControl.AddJalousie([Fahren-Objekt], [Step-Objekt],
@@ -91,9 +87,9 @@ Main::Main()
   WinControl.AddJalousie(75, 76, 77, 78, F("F1 Jalousie unten"), &KEY_JALOUSIEF1BTN, 0);
   WinControl.AddJalousie(80, 81, 82, 83, F("F1 Altar Jalousie"), &KEY_JALOUSIEF1ALT, 0);
   WinControl.AddJalousie(85, 86, 87, 88, F("F1 Altar Rollo"), &KEY_JALOUSIEF1ROL, 0);
-  WinControl.AddJalousie(100, 101, 102, 103, F("F2 Jalousie"), &KEY_JALOUSIEF2, 0);
+  WinControl.AddJalousie(100, 101, 102, 103, F("F2 Jalousie"), &KEY_JALOUSIEF2, MasterNutzungF2);
 
-  // Schalt-Abhängigkeiten zwischen Hauptfunktionen
+  // Einschalt-Abhängigkeiten zwischen Hauptfunktionen
   // [Name der Slavefunktion].CanActivate = &[Aktivierungsbedingung => Zeile entfernen oder z.B. MasterNutzungF1];
   NutzungF2.CanActivate = MasterNutzungF1;
   DMK.CanActivate = MasterAudio;

@@ -2,20 +2,14 @@
 
 WeatherController::WeatherController(NkkKey* weatherKey)
   : WeatherKey(weatherKey),
-    SendLightFoyer(KNX_WEATHER_FOYERLIGHTON),
-    SendDateTimeRequest(KNX_WEATHER_DATETIMEREQUEST),
-    SendWeatherRequest(KNX_WEATHER_WEATHERREQUEST),
-    RecvDate(KNX_WEATHER_DATE),
-    RecvTime(KNX_WEATHER_TIME),
-    RecvTemperature(KNX_WEATHER_TEMP),
-    RecvTemperatureMin(KNX_WEATHER_TEMPMIN),
-    RecvTemperatureMax(KNX_WEATHER_TEMPMAX),
-    RecvWind(KNX_WEATHER_WIND),
     DisplayDateTime(TIME_WEATHER_REQUESTDELAY),
-    DisplayWeather(TIME_WEATHER_REQUESTDELAY + TIME_WEATHER_DISPLAYDELAY)
+    DisplayWeather(TIME_WEATHER_REQUESTDELAY + TIME_WEATHER_DISPLAYDELAY),
+    DisplayAlarms(TIME_WEATHER_REQUESTDELAY + 2 * TIME_WEATHER_DISPLAYDELAY),
+    RainAlarm(false), WindAlarm(false)
 {
-
+  
 }
+
 void WeatherController::Begin()
 {
   // Led initialisieren
@@ -27,56 +21,96 @@ void WeatherController::Begin()
   WeatherKey->Btn.ClickEvent = new Delegate<>(this, &WeatherController::RequestWeather);
   DisplayDateTime.TimeIsUpEvent = new Delegate<>(this, &WeatherController::ShowDateTime);
   DisplayWeather.TimeIsUpEvent = new Delegate<>(this, &WeatherController::ShowWeather);
+  DisplayAlarms.TimeIsUpEvent = new Delegate<>(this, &WeatherController::ShowAlarms);
   SIMKNX128::AnyValueRecvEvent.Connect(this, &WeatherController::WeatherKnxObjectReceived);
 }
+
 void WeatherController::Update()
 {
   DisplayDateTime.Update();
   DisplayWeather.Update();
+  DisplayAlarms.Update();
 }
+
 void WeatherController::WeatherKnxObjectReceived(byte object, char* value)
 {
-  if (object == RecvDate)
+  switch (object)
   {
-    Day = atoi(strtok(value, " "));
-    Month = atoi(strtok(NULL, " "));
-    Year = atoi(strtok(NULL, " "));
-  }
-  else if (object == RecvTime)
-  {
-    strtok(value, " ");
-    Hour = atoi(strtok(NULL, " "));
-    Minute = atoi(strtok(NULL, " "));
-  }
-  else if (object == RecvTemperature)
-  {
-    Temperature = atof(strtok(value, " "));
-  }
-  else if (object == RecvTemperatureMin)
-  {
-    TemperatureMin = atof(strtok(value, " "));
-  }
-  else if (object == RecvTemperatureMax)
-  {
-    TemperatureMax = atof(strtok(value, " "));
-  }
-  else if (object == RecvWind)
-  {
-    Wind = atof(strtok(value, " "));
-  }
+  case KNX_WEATHER_DATE:
+      Day = atoi(strtok(value, " "));
+      Month = atoi(strtok(NULL, " "));
+      Year = atoi(strtok(NULL, " "));
+      break;
+
+  case KNX_WEATHER_TIME:
+      strtok(value, " ");
+      Hour = atoi(strtok(NULL, " "));
+      Minute = atoi(strtok(NULL, " "));
+      break;
+
+  case KNX_WEATHER_TEMP:
+      Temperature = atof(strtok(value, " "));
+      break;
+
+  case KNX_WEATHER_TEMPMIN:
+      TemperatureMin = atof(strtok(value, " "));
+      break;
+
+  case KNX_WEATHER_TEMPMAX:
+      TemperatureMax = atof(strtok(value, " "));
+      break;
+
+  case KNX_WEATHER_WIND:
+      Wind = atof(strtok(value, " "));
+      break;
+  
+  case KNX_WEATHER_WINDALARM:
+      if (SIMKNX128::ParseBool(value))
+      {
+          WindAlarm = true;
+          WeatherKey->Led.SetRatio(BiColorLED::RG_Red);
+          Global::Disp.ShowMessage(F("Windalarm - Bitte"), F("Jalousien öffnen"));
+      }
+      else
+      {
+          WindAlarm = false;
+          if (!RainAlarm)
+              WeatherKey->Led.SetRatio(BiColorLED::RG_Yellow);
+      }
+      break;
+  
+  case KNX_WEATHER_RAINALARM:
+      if (SIMKNX128::ParseBool(value))
+      {
+          RainAlarm = true;
+          WeatherKey->Led.SetRatio(BiColorLED::RG_Red);
+          Global::Disp.ShowMessage(F("Regenalarm - Dach-"), F("fenster f\xE1hrt zu"));
+      }
+      else
+      {
+          RainAlarm = false;
+          if (!WindAlarm)
+              WeatherKey->Led.SetRatio(BiColorLED::RG_Yellow);
+      }
+      break;
+    }
 }
+
 void WeatherController::RequestWeather()
 {
-  Global::Knx.SendBool(SendDateTimeRequest, true);
-  Global::Knx.SendBool(SendWeatherRequest, true);
+  Global::Knx.SendBool(KNX_WEATHER_DATETIMEREQUEST, true);
+  Global::Knx.SendBool(KNX_WEATHER_WEATHERREQUEST, true);
   DisplayDateTime.Start();
   DisplayWeather.Start();
+  DisplayAlarms.Start();
 }
+
 void WeatherController::SwitchFoyerLightOn()
 {
-  Global::Knx.SendBool(SendLightFoyer, true);
+  Global::Knx.SendBool(KNX_WEATHER_FOYERLIGHTON, true);
   Global::Disp.ShowMessage(TEXT_LIGHTFOYER, TEXT_ON);
 }
+
 void WeatherController::ShowDateTime()
 {
   char Line1[20], Line2[20];
@@ -84,6 +118,7 @@ void WeatherController::ShowDateTime()
   sprintf(Line2, "       %02i:%02i", Hour, Minute);
   Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
 }
+
 void WeatherController::ShowWeather()
 {
   char Line1[20], Line2[20];
@@ -93,5 +128,13 @@ void WeatherController::ShowWeather()
   sprintf(Line2, "LO %2i,%01i\xDF""C HI %2i,%01i\xDF""C",
     (int)TemperatureMin, (int)((TemperatureMin - (int)TemperatureMin) * 10),
     (int)TemperatureMax, (int)((TemperatureMax - (int)TemperatureMax) * 10));
+  Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
+}
+
+void WeatherController::ShowAlarms()
+{
+  char Line1[20], Line2[20];
+  sprintf(Line1, "Windalarm: %s", WindAlarm ? "ja" : "nein");
+  sprintf(Line1, "Regenalarm: %s", RainAlarm ? "ja" : "nein");
   Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
 }

@@ -2,13 +2,11 @@
 
 BeamerFunction::BeamerFunction(NkkKey* functionKey)
   : CanActivate(0), FunctionKey(functionKey), State(BeamerStates::Ready), IsSwitchedOn(false),
-    SendSwitch(KNX_BEAMER_SWITCH), SendGetState(KNX_BEAMER_GETSTATE),
-    RecvWarmUp(KNX_BEAMER_WARMUP), RecvReady(KNX_BEAMER_READY), RecvCountDown(KNX_BEAMER_COUNTDOWN), RecvCoolDown(KNX_BEAMER_COOLDOWN),
     SwitchTimeout(TIME_BEAMER_TIMEOUT),
     GetStateTimer(TIME_BEAMER_GETSTATE),
     ErrorID(Global::Disp.RegisterError(TEXT_BEAMER))
 {
-
+  
 }
 
 void BeamerFunction::Begin()
@@ -63,13 +61,13 @@ Global::Disp.ShowMessage(TEXT_BEAMER,
 FunctionKey->Led.SetRatio(IsSwitchedOn ? BiColorLED::RG_Green : BiColorLED::RG_Red);
 FunctionKey->Led.SetPulsePerSecond(TIME_PULSERATE);
 SwitchTimeout.Start();
-Global::Knx.SendBool(SendSwitch, IsSwitchedOn);
+Global::Knx.SendBool(KNX_BEAMER_SWITCH, IsSwitchedOn);
 GetStateTimer.Start();
 }
 
 void BeamerFunction::GetState()
 {
-  Global::Knx.SendBool(SendGetState, true);
+  Global::Knx.SendBool(KNX_BEAMER_GETSTATE, true);
   GetStateTimer.Start();
 }
 
@@ -81,13 +79,13 @@ void BeamerFunction::FunctionKnxObjectReceived(byte object, char* value)
 
   BeamerStates newState = State;
 
-  if (object == RecvWarmUp)
+  if (object == KNX_BEAMER_WARMUP)
     newState = BeamerStates::WarmUp;
-  else if (object == RecvReady)
+  else if (object == KNX_BEAMER_READY)
     newState = BeamerStates::Ready;
-  else if (object == RecvCountDown)
+  else if (object == KNX_BEAMER_COUNTDOWN)
     newState = BeamerStates::CountDown;
-  else if (object == RecvCoolDown)
+  else if (object == KNX_BEAMER_COOLDOWN)
     newState = BeamerStates::CoolDown;
   else
     return;

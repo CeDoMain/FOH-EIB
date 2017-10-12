@@ -43,8 +43,10 @@
 #define KNX_WEATHER_TEMPMIN           5     // minimale gemessene Temperatur (auf Anfrage)
 #define KNX_WEATHER_TEMPMAX           6     // maximale gemessene Temperatur (auf Anfrage)
 #define KNX_WEATHER_WIND              7     // aktuelle Windgeschwindigkeit (zyklisch und bei Änderung)
-#define KNX_WEATHER_FOYERLIGHTON      8     // Licht im Foyer einschalten (1)
+#define KNX_WEATHER_WINDALARM         8     // Windalarm für Jalousien (1) bzw. (0) bei Freigabe
+#define KNX_WEATHER_RAINALARM         9     // Regenalarm für Fenster (1) bzw. (0) bei Freigabe
+#define KNX_WEATHER_FOYERLIGHTON      69    // Licht im Foyer einschalten (1)
 
-#define KNX_GLOBAL_RAINALARM          9     // Regenalarm für Fenster (1) bzw. (0) bei Freigabe
+#define KNX_GLOBAL_LIGHTFOH           68    // Schaltet das Licht unter den FOH Tischen
 
 #endif

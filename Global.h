@@ -22,7 +22,6 @@ public:
   static MCP23017 GPIOchip[5];          // Taster GPIO Controller
   static NkkKey Key[5][5];              // Speichert Steuerung und Pins für jeden Button
   static bool IsKeyLockInactive;        // Gibt an, ob die Schlüsselfreigabe aktiv ist
-  static bool IsRaining;                // Gibt an, ob es regnet
   static DisplayController Disp;        // Displayverwaltung
   static SIMKNX128 Knx;                 // KNX-EIB Schnittstelle
   static unsigned int LoopFps;          // Wiederholrate der Loop
@@ -47,9 +46,6 @@ private:
 
   // Wird aufgerufen, wenn der Schlüssel losgelassen wurde
   static void KeyLockDeactivate();
-
-  // Wir daufgerufen, wenn sich der Regenalarm ändert
-  static void RainAlarmRecv(char* msg);
 };
 
 #endif

@@ -20,7 +20,7 @@ private:
   Delegate<bool>* MasterVideo;
   Delegate<bool>* MasterNutzungF1;
   Delegate<bool>* MasterNutzungF2;
-  Delegate<bool>* MasterRain;
+  
 public:
   MainFunction Audio;               // Hauptfunktion Audio
   MainFunction Video;               // Hauptfunktion Video

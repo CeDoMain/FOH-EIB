@@ -55,7 +55,6 @@ NkkKey Global::Key[5][5] =
  }
 };
 bool Global::IsKeyLockInactive = false;
-bool Global::IsRaining = false;
 unsigned int Global::LoopFps = 0;
 DisplayController Global::Disp = DisplayController(&KEY_ERROR, &Global::IsKeyLockInactive);
 SIMKNX128 Global::Knx = SIMKNX128();
@@ -89,7 +88,13 @@ void Global::Begin()
   Knx.Begin();
   KeyLockBtn.LongPressEvent = new Delegate<>(&Global::KeyLockActivate);
   KeyLockBtn.DeactivatedEvent = new Delegate<>(&Global::KeyLockDeactivate);
-  Knx.ValueRecvEvent[KNX_GLOBAL_RAINALARM] = new Delegate<void, char*>(&Global::RainAlarmRecv);
+  KEY_FOHLIGHT.Btn.ClickEvent = new Delegate<>([]()
+  {
+    static bool LightOn = false;
+    LightOn = !LightOn;
+    Global::Knx.SendBool(KNX_GLOBAL_LIGHTFOH, LightOn);
+    Global::Disp.ShowMessage(F("Licht unter FOH"), LightOn ? TEXT_ON : TEXT_OFF);
+  });
   KEY_INFO.Btn.ClickEvent = new Delegate<>([]()
   {
     float mem = 100.0 - freeMemory() / 8186.0 * 100.0;
@@ -97,7 +102,7 @@ void Global::Begin()
     char line1[20];
     char line2[20];
     sprintf(line1, "RAM: %i.%i%% %ifps", (int)mem, (int)((mem - (int)mem) * 100), Global::LoopFps);
-    sprintf(line2, "Version: 2.2");
+    sprintf(line2, "Version: 2.3");
     Global::Disp.DumpErrorList();
     Global::Disp.ShowMessage(line1, line2);
     Serial.println(line1);
@@ -137,9 +142,4 @@ void Global::KeyLockDeactivate()
 {
   IsKeyLockInactive = false;
   Disp.ShowMessage(TEXT_KEY, TEXT_DEACTIVATED);
-}
-
-void Global::RainAlarmRecv(char* value)
-{
-  IsRaining = SIMKNX128::ParseBool(value);
 }

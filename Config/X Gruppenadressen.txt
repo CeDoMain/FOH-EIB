@@ -15,10 +15,10 @@ ________________________________________________________________________________
 
 Audio             senden        10            Audio Hauptfunktion
 Audio             empfangen     11            Rückmeldung Audio Verstärker 1
-Audio             empfangen     12            Rückmeldung Audio Verstärker 1
-Audio             empfangen     13            Rückmeldung Audio Verstärker 1
-Audio             empfangen     14            Rückmeldung Audio Verstärker 1
-Audio             empfangen     15            Rückmeldung Audio Verstärker 1
+Audio             empfangen     12            Rückmeldung Audio Verstärker 2
+Audio             empfangen     13            Rückmeldung Audio Verstärker 3
+Audio             empfangen     14            Rückmeldung Audio Verstärker 4
+Audio             empfangen     15            Rückmeldung Audio Verstärker 5
 Audio             empfangen     16            Rückmeldung Audio FOH
 Audio             empfangen     17            Rückmeldung Audio MixRack
 DMK               senden        18            DMK Hauptfunktion
@@ -78,7 +78,7 @@ Nutzung F2        empfangen     63            Rückmeldung Nutzung F2
 ---------         ---------     65            ---------
 ---------         ---------     66            ---------
 ---------         ---------     67            ---------
----------         ---------     68            ---------
+Licht FOH         senden        68            ---------
 Licht Foyer       senden        69            ---------
 ________________________________________________________________________________
 

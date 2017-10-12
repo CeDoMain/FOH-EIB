@@ -9,13 +9,10 @@ class IntensityController
 {
   // Felder
 private:
-  NkkKey* IntensityKey;      // Taster, der Helligkeit und Kontrast steuert
-  Timer DimmerTimeout;          // Timer, der Taster und Anzeige dimmt
-  Fader Fade;                   // Fader, der Taster und Anzeige dimmt
-  float ActiveIntensity;        // Helligkeit nach Tastendruck
-  const float DimmedIntensity;  // Helligkeit im Standby
-  const float DimmTime;         // Zeit in s, in der gedimmt wird
-  const float WakeUpTime;       // Zeit in s, in der die Aktiv-Helligkeit eingefadet wird
+  NkkKey* IntensityKey;               // Taster, der Helligkeit und Kontrast steuert
+  Timer DimmerTimeout;                // Timer, der Taster und Anzeige dimmt
+  Fader<decimal> Fade;                // Fader, der Taster und Anzeige dimmt
+  decimal ActiveIntensity;            // Helligkeit nach Tastendruck
 
   // Konstruktor
 public:
@@ -31,7 +28,7 @@ public:
 
 private:
   // Setzt die Helligkeit als neuen globalen Wert
-  void FadeChanged(float value);
+  void FadeChanged(decimal value);
 
   // Dimmt das Display und die Taster
   void DimmIntensity();

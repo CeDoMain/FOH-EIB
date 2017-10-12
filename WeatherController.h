@@ -11,19 +11,11 @@ class WeatherController
   // Felder
 private:
   NkkKey* WeatherKey;                       // Taster zum Steuern der Wetterabfrage und Beleuchtung Foyer
-  const byte SendLightFoyer;                // Licht im Foyer an
-  const byte SendDateTimeRequest;           // KNX Objekt um das Datum und die Uhrzeit abzufragen
-  const byte SendWeatherRequest;            // KNX Objekt um die Minimal und Maximal Außentemperatur abzufragen
-  const byte RecvDate;
-  const byte RecvTime;
-  const byte RecvTemperature;
-  const byte RecvTemperatureMin;
-  const byte RecvTemperatureMax;
-  const byte RecvWind;
   byte Day, Month, Hour, Minute;
   word Year;
   float Temperature, TemperatureMin, TemperatureMax, Wind;
-  Timer DisplayDateTime, DisplayWeather;
+  Timer DisplayDateTime, DisplayWeather, DisplayAlarms;
+  bool RainAlarm, WindAlarm;
 
   // Konstruktor
 public:
@@ -51,6 +43,9 @@ public:
 
   // Zeigt Temperatur und Wind auf dem Display an
   void ShowWeather();
+
+  // Zeigt Wind- und Regenalarm auf dem Display an
+  void ShowAlarms();
 };
 
 #endif

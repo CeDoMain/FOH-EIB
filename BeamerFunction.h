@@ -22,12 +22,6 @@ private:
     CoolDown
   } State;                          // Gibt den aktuellen Zustand des Beamers an
   bool IsSwitchedOn;                // Gibt an, ob der Beamer an oder aus geschaltet ist/wird
-  const byte SendSwitch;            // KNX Objekte für die verschiedenen Zustände
-  const byte SendGetState;
-  const byte RecvWarmUp;
-  const byte RecvReady;
-  const byte RecvCountDown;
-  const byte RecvCoolDown;
   Timer SwitchTimeout;              // Löst nach einer gewissen Zeit einen Timeout aus
   Timer GetStateTimer;              // Fragt nach einer gewissen Zeit den Zustand des Beamers ab
   const byte ErrorID;               // ID, die den entsprechenden Fehler im DisplayController angibt

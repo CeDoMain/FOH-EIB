@@ -9,6 +9,7 @@ DisplayController::DisplayController(NkkKey* errorKey, bool* isKeyActive)
 {
 
 }
+
 void DisplayController::Begin()
 {
   // LCD mit 2x20 Zeichen initialisieren, leeren, Kontrast einstellen und beleuchten
@@ -27,12 +28,14 @@ void DisplayController::Begin()
   ErrorKey->Led.SetRatio(BiColorLED::RG_Green);
   ErrorKey->Led.On();
 }
+
 void DisplayController::Update()
 {
   // Timer weiterlaufen lassen
   MessageTimeout.Update();
   ErrorTimeout.Update();
 }
+
 void DisplayController::ShowMessage(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2, unsigned int intervall)
 {
   // Mitteilung für eine kurze Zeit anzeigen
@@ -43,6 +46,7 @@ void DisplayController::ShowMessage(const __FlashStringHelper* msg1, const __Fla
   MessageTimeout.SetTime(intervall);
   MessageTimeout.Start();
 }
+
 void DisplayController::ShowMessage(char* msg1, char* msg2, unsigned int intervall)
 {
   // Mitteilung für eine kurze Zeit anzeigen
@@ -61,6 +65,7 @@ void DisplayController::ShowMessage(char* msg1, char* msg2, unsigned int interva
   MessageTimeout.SetTime(intervall);
   MessageTimeout.Start();
 }
+
 void DisplayController::ShowIntensity(byte value, byte max)
 {
   // Helligkeit für eine kurze Zeit anzeigen
@@ -73,6 +78,7 @@ void DisplayController::ShowIntensity(byte value, byte max)
   Lcd.print(max);
   MessageTimeout.Start();
 }
+
 byte DisplayController::RegisterError(const __FlashStringHelper* name)
 {
   byte id = RegisteredErrorCount;
@@ -80,6 +86,7 @@ byte DisplayController::RegisterError(const __FlashStringHelper* name)
   Errors.Add(new Error{ false, name, id });
   return id;
 }
+
 void DisplayController::ErrorOccured(byte id)
 {
   // Abbrechen, wenn die ID ungültig ist
@@ -99,6 +106,7 @@ void DisplayController::ErrorOccured(byte id)
   ShowedError = id;
   ShowError();
 }
+
 void DisplayController::SetContrast(float contrast)
 {
   // Kontrastspannung darf maximal 80 sein
@@ -114,8 +122,7 @@ void DisplayController::SetIntensity(float intensity)
 void DisplayController::NextError()
 {
   // Nächsten Fehler in der Liste finden
-  const auto showedError = ShowedError;
-  
+  const short showedError = ShowedError;
   Error* err = Errors.Find(
     [showedError](Error* err) -> bool { return err->Occurred && err->ID > showedError; });
 
@@ -136,6 +143,7 @@ void DisplayController::NextError()
   ShowedError = err->ID;
   ShowError();
 }
+
 void DisplayController::AcknowledgeError()
 {
   if(*IsKeyActive)
@@ -150,12 +158,13 @@ void DisplayController::AcknowledgeError()
       return;
 
     // Den angezeigten Fehler löschen
-    const byte showedError = ShowedError;
+    const short showedError = ShowedError;
     Errors.Find([showedError](Error* err) -> bool
       { return err->ID == showedError; })->Occurred = false;
   }
   NextError();
 }
+
 void DisplayController::ShowError()
 {
   MessageTimeout.Stop();
@@ -165,7 +174,7 @@ void DisplayController::ShowError()
     { return err->Occurred; });
 
   // Position des anzuzeigenden Fehlers in dieser Menge bestimmen
-  const byte showedError = ShowedError;
+  const short showedError = ShowedError;
   long errorIndex = Errors.Count([showedError](Error* err) -> bool
     { return err->Occurred && err->ID <= showedError; });
 
@@ -184,6 +193,7 @@ void DisplayController::ShowError()
   PrintTwoLine(err->Name, TEXT_INCORRECT);
   ErrorTimeout.Start();
 }
+
 void DisplayController::ClearScreen()
 {
   ErrorTimeout.Stop();
@@ -191,6 +201,7 @@ void DisplayController::ClearScreen()
   ShowedError = -1;
   Lcd.clear();
 }
+
 void DisplayController::PrintTwoLine(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2)
 {
   if (msg1 != 0)
@@ -203,6 +214,7 @@ void DisplayController::PrintTwoLine(const __FlashStringHelper* msg1, const __Fl
     Lcd.print(msg2);
   }
 }
+
 void DisplayController::DumpErrorList()
 {
   Errors.ForEach([](Error* err)

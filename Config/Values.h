@@ -21,6 +21,6 @@
 
 #define TIME_WINDOW_DESELECT          5000      // Zeit in ms, nach der ein gewähltes Fenster oder eine Jalousie wieder abgewählt wird
 
-#define TIME_PULSERATE                0.75      // Pulsrate aller blinkenden Taster in P/s 
+#define TIME_PULSERATE                0.75      // Pulsiergeschwindigkeit in P/s aller blinkenden Taster
 
 #endif

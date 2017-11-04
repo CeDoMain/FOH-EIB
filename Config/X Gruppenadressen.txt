@@ -38,9 +38,9 @@ Video             empfangen     21            Videohub
 >  Beamer         senden        30            Beamer Hauptfunktion
 >  Beamer         senden        31            Statusabfrage
 ---------         ---------     32            ---------
->  Beamer         empfangen     33            Betriebsbereitschaft
->  Beamer         empfangen     34            Zurückzählen
->  Beamer         empfangen     35            Aufwärmen
+>  Beamer         empfangen     33            Ausgeschaltet
+>  Beamer         empfangen     34            Aufwärmen
+>  Beamer         empfangen     35            Eingeschaltet
 >  Beamer         empfangen     36            Abkühlen
 ---------         ---------     37            ---------
 ---------         ---------     38            ---------

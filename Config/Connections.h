@@ -30,9 +30,9 @@
 // KNX Objekte für Beamersteuerung
 #define KNX_BEAMER_SWITCH             30    // Ein (1) und Ausschalten (0) des Beamers
 #define KNX_BEAMER_GETSTATE           31    // Statusabfrage (1)
-#define KNX_BEAMER_READY              33    // Betriebsbereit (kann wieder Ein- oder Ausschalten) (1)
-#define KNX_BEAMER_COUNTDOWN          34    // Zurückzählen beim Ausschalten (1)
-#define KNX_BEAMER_WARMUP             35    // Aufwärmen beim Anschalten (1)
+#define KNX_BEAMER_OFF                33    // Betriebsbereit (1)
+#define KNX_BEAMER_WARMUP             34    // Zurückzählen beim Ausschalten (1)
+#define KNX_BEAMER_ON                 35    // Aufwärmen beim Anschalten (1)
 #define KNX_BEAMER_COOLDOWN           36    // Abkühlen nach Zurückzählen (1)
 
 #define KNX_WEATHER_DATETIMEREQUEST   0     // Datumsabfrage (1)

@@ -16,9 +16,9 @@ private:
   NkkKey* FunctionKey;              // Taster zum Steuern der Hauptfunktion
   enum BeamerStates
   {
+    Off,
     WarmUp,
-    Ready,
-    CountDown,
+    On,
     CoolDown
   } State;                          // Gibt den aktuellen Zustand des Beamers an
   bool IsSwitchedOn;                // Gibt an, ob der Beamer an oder aus geschaltet ist/wird

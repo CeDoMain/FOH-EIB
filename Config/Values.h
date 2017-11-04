@@ -1,7 +1,7 @@
 #ifndef VALUES_H
 #define VALUES_H
 
-#define TIME_BEAMER_TIMEOUT           20000     // Zeit in ms, nach der der Beamerschaltvorgang abgeschlossen sein muss
+#define TIME_BEAMER_TIMEOUT           300000    // Zeit in ms, nach der der Beamerschaltvorgang abgeschlossen sein muss
 #define TIME_BEAMER_GETSTATE          2000      // Intervall in ms, in dem ein Status vom Beamer abgefragt wird
 #define TIME_MAINFUNCTION_TIMEOUT     20000     // Zeit in ms, nach der die Hauptfunktionen geschaltet haben müssen
 #define TIME_AUDIO_TIMEOUT            40000     // Zeit in ms, nach der die Audiohauptfunktion geschaltet haben muss

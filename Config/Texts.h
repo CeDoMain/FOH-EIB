@@ -16,7 +16,7 @@
 #define TEXT_ACTIVATED              F("aktiviert")
 #define TEXT_DEACTIVATED            F("deaktiviert")
 #define TEXT_ALREADY_SWITCHING_1    F("Schaltvorgang")
-#define TEXT_ALREADY_SWITCHING_2    F("l\xF5uft bereits")
+#define TEXT_ALREADY_SWITCHING_2    F("l\xE1uft bereits")
 
 #define TEXT_AUDIO                  F("Audio")
 #define TEXT_VIDEO                  F("Video")
@@ -32,8 +32,7 @@
 #define TEXT_INCORRECT              F("fehlerhaft")
 
 #define TEXT_BEAMER_NOTIFY          F("Beamer meldet")
-#define TEXT_BEAMER_BOOTING         F("Einschalten")
-#define TEXT_BEAMER_COUNTDOWN       F("Zur\xF5""ckz\xE1hlen")
+#define TEXT_BEAMER_WARMUP          F("Aufw\xE1rmen")
 #define TEXT_BEAMER_COOLDOWN        F("Abk\xF5hlen")
 
 #define TEXT_INTENSITY              F("Helligkeit: ")

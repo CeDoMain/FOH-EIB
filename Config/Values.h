@@ -3,8 +3,9 @@
 
 #define TIME_BEAMER_TIMEOUT           300000    // Zeit in ms, nach der der Beamerschaltvorgang abgeschlossen sein muss
 #define TIME_BEAMER_GETSTATE          2000      // Intervall in ms, in dem ein Status vom Beamer abgefragt wird
-#define TIME_MAINFUNCTION_TIMEOUT     20000     // Zeit in ms, nach der die Hauptfunktionen geschaltet haben müssen
-#define TIME_AUDIO_TIMEOUT            40000     // Zeit in ms, nach der die Audiohauptfunktion geschaltet haben muss
+#define TIME_DEFAULT_TIMEOUT          20000     // Zeit in ms, nach der die Hauptfunktionen geschaltet haben müssen
+#define TIME_AUDIO_TIMEOUT            70000     // Zeit in ms, nach der die Audiohauptfunktion geschaltet haben muss
+#define TIME_LIGHT_TIMEOUT            70000     // Zeit in ms, nach der die Lichthauptfunktion geschaltet haben muss
 
 #define TIME_DISP_MSGTIMEOUT          3000      // Anzeigedauer in ms für eine Mitteilung
 #define TIME_DISP_ERRTIMEOUT          5000      // Anzeigedauer in ms für eine Fehlermeldung

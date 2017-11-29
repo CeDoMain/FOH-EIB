@@ -5,7 +5,7 @@ Main::Main()
     // [Name](&Global::Key[y][x], [sendeObjekt], F("[Name max. 20 Zeichen]")),
   : Audio(&KEY_AUDIO, 10, F("Audio"), TIME_AUDIO_TIMEOUT),
     Video(&KEY_VIDEO, 20, F("Video")),
-    Licht(&KEY_LIGHT, 50, F("Licht")),
+    Licht(&KEY_LIGHT, 50, F("Licht"), TIME_LIGHT_TIMEOUT),
     NutzungF1(&KEY_USEF1, 60, F("Nutzung Forum 1")),
     NutzungF2(&KEY_USEF2, 62, F("Nutzung Forum 2")),
     DMK(&KEY_DMK, 18, F("Dolmetscherkabinen")),

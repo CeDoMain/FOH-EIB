@@ -108,7 +108,7 @@ void Global::Begin()
     char line1[20];
     char line2[20];
     sprintf(line1, "RAM: %i.%i%% %ifps", (int)mem, (int)((mem - (int)mem) * 100), Global::LoopFps);
-    sprintf(line2, "Version: 2.5");
+    sprintf(line2, "Version: 2.6");
     Global::Disp.DumpErrorList();
     Global::Disp.ShowMessage(line1, line2);
     Serial.println(line1);

@@ -6,6 +6,9 @@
 
 #include "Global.h"
 
+// Festkommatyp mit 4 Nachkommastellen und Vorzeichen
+typedef short decimal;
+
 class WeatherController
 {
   // Felder
@@ -13,7 +16,7 @@ private:
   NkkKey* WeatherKey;                       // Taster zum Steuern der Wetterabfrage und Beleuchtung Foyer
   byte Day, Month, Hour, Minute;
   word Year;
-  float Temperature, TemperatureMin, TemperatureMax, Wind;
+  decimal Temperature, TemperatureMin, TemperatureMax, Wind;
   Timer DisplayDateTime, DisplayWeather, DisplayAlarms;
   bool RainAlarm, WindAlarm;
 

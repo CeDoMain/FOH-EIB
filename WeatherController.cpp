@@ -49,19 +49,19 @@ void WeatherController::WeatherKnxObjectReceived(byte object, char* value)
       break;
 
   case KNX_WEATHER_TEMP:
-      Temperature = atof(strtok(value, " "));
+      Temperature = atof(strtok(value, " ")) * 10;
       break;
 
   case KNX_WEATHER_TEMPMIN:
-      TemperatureMin = atof(strtok(value, " "));
+      TemperatureMin = atof(strtok(value, " ")) * 10;
       break;
 
   case KNX_WEATHER_TEMPMAX:
-      TemperatureMax = atof(strtok(value, " "));
+      TemperatureMax = atof(strtok(value, " ")) * 10;
       break;
 
   case KNX_WEATHER_WIND:
-      Wind = atof(strtok(value, " "));
+      Wind = atof(strtok(value, " ")) * 10;
       break;
   
   case KNX_WEATHER_WINDALARM:
@@ -113,7 +113,7 @@ void WeatherController::SwitchFoyerLightOn()
 
 void WeatherController::ShowDateTime()
 {
-  char Line1[20], Line2[20];
+  char Line1[21], Line2[21];
   sprintf(Line1, "     %02i.%02i.%i", Day, Month, Year);
   sprintf(Line2, "       %02i:%02i", Hour, Minute);
   Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
@@ -121,19 +121,19 @@ void WeatherController::ShowDateTime()
 
 void WeatherController::ShowWeather()
 {
-  char Line1[20], Line2[20];
-  sprintf(Line1, "TP %2i,%01i\xDF""C WI %2i,%01im/s",
-    (int)Temperature, (int)((Temperature - (int)Temperature) * 10),
-    (int)Wind, (int)((Wind - (int)Wind) * 10));
-  sprintf(Line2, "LO %2i,%01i\xDF""C HI %2i,%01i\xDF""C",
-    (int)TemperatureMin, (int)((TemperatureMin - (int)TemperatureMin) * 10),
-    (int)TemperatureMax, (int)((TemperatureMax - (int)TemperatureMax) * 10));
+  char Line1[21], Line2[21];
+  sprintf(Line1, "T %3i.%01i\xDF""C WI %2i.%01im/s",
+    Temperature / 10, abs(Temperature % 10),
+    Wind / 10, abs(Wind % 10));
+  sprintf(Line2, "LO %3i.%01i\xDF""C HI %2i.%01i\xDF""C",
+    TemperatureMin / 10, abs(TemperatureMin % 10),
+    TemperatureMax / 10, abs(TemperatureMax % 10));
   Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);
 }
 
 void WeatherController::ShowAlarms()
 {
-  char Line1[20], Line2[20];
+  char Line1[21], Line2[21];
   sprintf(Line1, "Windalarm: %s", WindAlarm ? "ja" : "nein");
   sprintf(Line2, "Regenalarm: %s", RainAlarm ? "ja" : "nein");
   Global::Disp.ShowMessage(Line1, Line2, TIME_WEATHER_DISPLAYDELAY);

@@ -1,4 +1,4 @@
-- Programmierung von Cedric Donges 2016 / 2017 
+- Programmiert von Cedric Donges 2016 / 2017 
 
 - Auf der Platine gibt es drei Fehler:
   Schraubklemm Nr.7 an PWM6
@@ -18,4 +18,15 @@
   2) Kommentar "// Rückmeldungen konfigurieren" suchen
   3) Zeile die mit "DMK." beginnt suchen
   4) Eine Zeile einfügen und den Dummy aus dem Kommentar einfügen und ausfüllen
-  5) Audio.AddRecvObj[104], F("Steckdose links"));
+  5) DMK.AddRecvObj[104], F("Steckdose links"));
+
+- TODO bei Langeweile (hatte Cedric nicht):
+  BeamerFunction::Evaluate ist nicht 100% optimal:
+  Eigentlich muss bei der State-Abfrage auch noch die Variable IsSwitchedOn gegengeprüft werden,
+  denn wenn der Beamer nicht reagiert wird nach einem Timeout der Status trotzdem umgeschaltet gelassen.
+  Das muss sein, denn wenn der Beamer manuell umgeschaltet wird, erkennt das das Panel nicht.
+  Liegt dran, dass der Status-Poll nur beim Schalten ausgeführt wird.
+  Also:
+  > Langsamer Status-Poll bei Betrieb
+  > Schneller Status-Poll bei Schalten
+  > Gegenprüfen von IsSwitchedOn in den ifs von BeamerFunction::Evaluate

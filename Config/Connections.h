@@ -7,8 +7,9 @@
 #define CONN_I2C_CONTROL      B000
 #define CONN_I2C_MAINFUNC_1   B001
 #define CONN_I2C_MAINFUNC_2   B010
-#define CONN_I2C_WINDOW_1     B110          // A0 ist Defekt => immer GND
+#define CONN_I2C_WINDOW_1     B110          // A0 ist defekt => wird immer als GND erkannt
 #define CONN_I2C_WINDOW_2     B100
+
 // Anschluss für den Schlüsselschalter (Schließer)
 #define CONN_KEY              ArduinoMega::DigitalPin::D7
 

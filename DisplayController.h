@@ -14,73 +14,73 @@
 
 class DisplayController
 {
-  // Aufzählungen
+    // Aufzählungen
 public:
-  struct Error
-  {
-    bool Occurred;
-    const __FlashStringHelper* Name;
-    byte ID;
-  };
+    struct Error
+    {
+      bool Occurred;                    // Gibt an, ob der Fehler aufgetreten ist
+      const __FlashStringHelper* Name;  // Anzeigetext der Fehlermeldung
+      byte ID;                          // Eindeutige Nummer des Fehlers
+    };
 
-  // Felder
+    // Felder
 private:
-  LiquidCrystal Lcd;            // Anzeigehardware
-  NkkKey* ErrorKey;             // Taster zum Weiterschalten und Quittieren der Fehler
-  Timer MessageTimeout;         // Timer, der Meldungen ausblendet
-  Timer ErrorTimeout;           // Timer, der Fehler ausblendet
-  LinkedList<Error*> Errors;    // Liste mit registrierten Fehlern
-  byte RegisteredErrorCount;    // Anzahl der registrierten Fehler
-  short ShowedError;            // ID des anzuzeigenden Fehlers
-  bool* IsKeyActive;            // Gibt an, ob der Schlüsselschalter aktiv ist
+    LiquidCrystal Lcd;            // Anzeigehardware
+    NkkKey* ErrorKey;             // Taster zum Weiterschalten und Quittieren der Fehler
+    Timer MessageTimeout;         // Timer, der Meldungen ausblendet
+    Timer ErrorTimeout;           // Timer, der Fehler ausblendet
+    LinkedList<Error*> Errors;    // Liste mit registrierten Fehlern
+    byte RegisteredErrorCount;    // Anzahl der registrierten Fehler
+    short ShowedError;            // ID des anzuzeigenden Fehlers
+    bool* IsKeyActive;            // Gibt an, ob der Schlüsselschalter aktiv ist
 
-  // Konstruktor
+    // Konstruktor
 public:
-  DisplayController(NkkKey* errorKey, bool* isKeyActive);
+    DisplayController(NkkKey* errorKey, bool* isKeyActive);
 
-  // Methoden
+    // Methoden
 public:
-  // Initialisiert den DisplayController
-  void Begin();
+    // Initialisiert den DisplayController
+    void Begin();
 
-  // Muss in jedem Frame aufgerufen werden
-  void Update();
+    // Muss in jedem Frame aufgerufen werden
+    void Update();
 
-  // Zeigt eine Meldung an
-  void ShowMessage(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2 = 0, unsigned int intervall = TIME_DISP_MSGTIMEOUT);
-  void ShowMessage(char* msg1, char* msg2 = 0, unsigned int intervall = TIME_DISP_MSGTIMEOUT);
-  void ShowIntensity(byte value, byte max);
+    // Zeigt eine Meldung an
+    void ShowMessage(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2 = 0, unsigned int intervall = TIME_DISP_MSGTIMEOUT);
+    void ShowMessage(char* msg1, char* msg2 = 0, unsigned int intervall = TIME_DISP_MSGTIMEOUT);
+    void ShowIntensity(byte value, byte max);
 
-  // Registriert einen Fehler und gibt seine ID zurück
-  byte RegisterError(const __FlashStringHelper* name);
+    // Registriert einen Fehler und gibt seine ID zurück
+    byte RegisterError(const __FlashStringHelper* name);
 
-  // Löst eine Fehlermeldung aus
-  void ErrorOccured(byte id);
+    // Löst eine Fehlermeldung aus
+    void ErrorOccured(byte id);
 
-  // Ändert die Helligkeit der Hintergrundbeleuchtung [0;1]
-  void SetIntensity(float intensity);
+    // Ändert die Helligkeit der Hintergrundbeleuchtung [0;1]
+    void SetIntensity(float intensity);
 
-  // Ändert den Kontrast des Display [0;1]
-  void SetContrast(float contrast);
+    // Ändert den Kontrast des Display [0;1]
+    void SetContrast(float contrast);
 
-  // Schreibt Dump der Errorliste
-  void DumpErrorList();
+    // Schreibt Dump der Errorliste
+    void DumpErrorList();
 
 private:
-  // Zeigt den Fehler mit der angegebenen ID an
-  void ShowError();
+    // Zeigt den Fehler mit der angegebenen ID an
+    void ShowError();
 
-  // Löscht das Display
-  void ClearScreen();
+    // Löscht das Display
+    void ClearScreen();
 
-  // Zeigt die nächste Fehlermeldung an oder ändert auf grün
-  void NextError();
+    // Zeigt die nächste Fehlermeldung an oder ändert auf grün
+    void NextError();
 
-  // Quittiert eine Fehlermeldung
-  void AcknowledgeError();
+    // Quittiert eine Fehlermeldung
+    void AcknowledgeError();
 
-  // Zeigt zwei Zeilen Text an
-  void PrintTwoLine(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2 = 0);
+    // Zeigt zwei Zeilen Text an
+    void PrintTwoLine(const __FlashStringHelper* msg1, const __FlashStringHelper* msg2 = 0);
 };
 
 #endif

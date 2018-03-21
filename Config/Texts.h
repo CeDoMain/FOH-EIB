@@ -6,10 +6,10 @@
 // Hier stehen alle mehrfachverwendeten Texte
 // maximal 20 Zeichen pro Text und in F("") eingeschlossen
 // Umlaute im Displaytext:
-//  ä = \xE1
-//  ö = \xEF
-//  ü = \xF5
-//  Umlaut-Großbuchstaben gibt es nicht
+//   ä = \xE1
+//   ö = \xEF
+//   ü = \xF5
+//   Umlaut-Großbuchstaben gibt es nicht
 
 #define TEXT_KEY                    F("Schl\xF5ssel")
 #define TEXT_NOT_ACTIVE             F("nicht aktiv")

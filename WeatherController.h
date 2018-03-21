@@ -11,44 +11,44 @@ typedef short decimal;
 
 class WeatherController
 {
-  // Felder
+    // Felder
 private:
-  NkkKey* WeatherKey;                       // Taster zum Steuern der Wetterabfrage und Beleuchtung Foyer
-  byte Day, Month, Hour, Minute;
-  word Year;
-  decimal Temperature, TemperatureMin, TemperatureMax, Wind;
-  Timer DisplayDateTime, DisplayWeather, DisplayAlarms;
-  bool RainAlarm, WindAlarm;
+    NkkKey* WeatherKey;                       // Taster zum Steuern der Wetterabfrage und Beleuchtung Foyer
+    byte Day, Month, Hour, Minute;            // Variablen für Uhrzeit und Datum
+    word Year;                                // Variable für Jahr
+    decimal Temperature, TemperatureMin, TemperatureMax, Wind;    // Variablen für Temperaturen
+    Timer DisplayDateTime, DisplayWeather, DisplayAlarms;         // Timer zum zeitversetzen Anzeigen der Meldungen
+    bool RainAlarm, WindAlarm;                // Gibt an ob Alarme ausgelöst wurden
 
-  // Konstruktor
+    // Konstruktor
 public:
-  WeatherController(NkkKey* weatherKey);
+    WeatherController(NkkKey* weatherKey);
 
-  // Methoden
+    // Methoden
 public:
-  // Initialisiert den Wettercontroller
-  void Begin();
+    // Initialisiert den Wettercontroller
+    void Begin();
 
-  // Muss in jedem Frame aufgerufen werden
-  void Update();
+    // Muss in jedem Frame aufgerufen werden
+    void Update();
 
-  // Wird aufgerufen, wenn eine Rückmeldung empfangen wurde
-  void WeatherKnxObjectReceived(byte object, char* value);
+    // Wird aufgerufen, wenn eine Rückmeldung empfangen wurde
+    void WeatherKnxObjectReceived(byte object, char* value);
 
-  // Wird aufgerufen, wenn die Wetterstation abgefragt werden soll
-  void RequestWeather();
+    // Wird aufgerufen, wenn die Wetterstation abgefragt werden soll
+    void RequestWeather();
 
-  // Wird aufgerufen, wenn das Licht im Foyer eingeschaltet werden soll
-  void SwitchFoyerLightOn();
+    // Wird aufgerufen, wenn das Licht im Foyer eingeschaltet werden soll
+    void SwitchFoyerLightOn();
 
-  // Zeigt Datum und Uhrzeit auf dem Display an
-  void ShowDateTime();
+    // Zeigt Datum und Uhrzeit auf dem Display an
+    void ShowDateTime();
 
-  // Zeigt Temperatur und Wind auf dem Display an
-  void ShowWeather();
+    // Zeigt Temperatur und Wind auf dem Display an
+    void ShowWeather();
 
-  // Zeigt Wind- und Regenalarm auf dem Display an
-  void ShowAlarms();
+    // Zeigt Wind- und Regenalarm auf dem Display an
+    void ShowAlarms();
 };
 
 #endif
